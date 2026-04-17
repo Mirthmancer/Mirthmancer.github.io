@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mirthmancer — Bard · Philocalist · Truth-seeker</title>
+<meta name="description" content="Mirthmancer — poet, voice artist, songwriter. Spoken word, original music, voice acting, and audiobooks.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Cinzel+Decorative:wght@400;700&family=Nunito:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --ink:#0d0a1a;
+  --deep:#13102b;
+  --plum:#3d2270;
+  --violet:#6b3fa0;
+  --periwinkle:#7b8ed4;
+  --sky:#5baee8;
+  --skylt:#a8d4f5;
+  --mint:#5dd6b8;
+  --lavender:#c3aee8;
+  --cream:#f0ecff;
+  --gold:#e8c96a;
+}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--ink);
+  color:var(--cream);
+  font-family:'Nunito',sans-serif;
+  font-weight:300;
+  overflow-x:hidden;
+}
+
+/* ── MAGICAL BACKGROUND ── */
+#magic-bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+#magic-canvas{position:absolute;inset:0;width:100%;height:100%;}
+.sym{
+  position:absolute;pointer-events:none;opacity:0;
+  animation:floatSym linear infinite;will-change:transform,opacity;
+}
+@keyframes floatSym{
+  0%{opacity:0;transform:translateY(20px) rotate(0deg);}
+  8%{opacity:var(--sym-op);}
+  90%{opacity:var(--sym-op);}
+  100%{opacity:0;transform:translateY(-60px) rotate(var(--sym-rot));}
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.1rem 3rem;
+  background:rgba(13,10,26,0.82);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(163,140,230,0.12);
+}
+.nav-logo{
+  font-family:'Cinzel Decorative',serif;font-size:1rem;letter-spacing:.08em;
+  background:linear-gradient(120deg,var(--lavender),var(--sky),var(--mint));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  cursor:pointer;
+}
+.nav-links{display:flex;gap:1.8rem;align-items:center;}
+.nav-links a{
+  font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--skylt);text-decoration:none;opacity:.75;transition:opacity .2s,color .2s;cursor:pointer;
+}
+.nav-links a:hover{opacity:1;color:var(--mint);}
+.nav-contact-btn{
+  padding:.45rem 1.1rem;border-radius:30px;
+  border:1px solid rgba(91,174,232,0.35);color:var(--skylt);
+  font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
+  text-decoration:none;transition:all .2s;cursor:pointer;
+}
+.nav-contact-btn:hover{border-color:var(--mint);color:var(--mint);opacity:1;}
+
+/* ── PAGES ── */
+.page{display:none;}
+.page.active{display:block;}
+
+/* ── HERO ── */
+#hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;
+  text-align:center;padding:8rem 2rem 5rem;
+  position:relative;z-index:10;
+}
+.hero-name{
+  font-family:'Cinzel Decorative',serif;
+  font-size:clamp(2.8rem,7vw,6.5rem);
+  font-weight:700;letter-spacing:.06em;line-height:1.05;
+  background:linear-gradient(135deg,var(--cream) 0%,var(--lavender) 35%,var(--sky) 65%,var(--mint) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  animation:fadeUp .9s .05s ease both;
+}
+.hero-subtitle{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:clamp(.95rem,1.8vw,1.2rem);
+  color:var(--skylt);letter-spacing:.18em;margin-top:.9rem;
+  animation:fadeUp .9s .15s ease both;opacity:.85;
+}
+.hero-tagline{
+  margin-top:2.2rem;
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:clamp(1rem,2vw,1.35rem);
+  line-height:2.1;letter-spacing:.03em;
+  animation:fadeUp .9s .25s ease both;
+}
+.hero-tagline span{display:block;color:var(--lavender);}
+.hero-tagline span:nth-child(2){color:var(--skylt);}
+.hero-tagline span:nth-child(3){color:var(--mint);opacity:.9;}
+.hero-tagline span:nth-child(4){color:var(--lavender);opacity:.8;}
+.hero-cta{
+  display:flex;gap:1rem;margin-top:3rem;flex-wrap:wrap;justify-content:center;
+  animation:fadeUp .9s .38s ease both;
+}
+.btn-primary{
+  padding:.85rem 2.2rem;border-radius:40px;
+  background:linear-gradient(135deg,var(--violet),var(--sky));
+  color:#fff;font-family:'Nunito',sans-serif;font-size:.85rem;letter-spacing:.1em;
+  text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;
+  transition:transform .2s,box-shadow .2s;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(91,174,232,0.3);}
+.btn-ghost{
+  padding:.85rem 2.2rem;border-radius:40px;border:1px solid rgba(163,140,230,0.35);
+  color:var(--lavender);font-family:'Nunito',sans-serif;font-size:.85rem;
+  letter-spacing:.1em;text-transform:uppercase;text-decoration:none;cursor:pointer;
+  transition:all .2s;background:transparent;border:1px solid rgba(163,140,230,0.35);
+}
+.btn-ghost:hover{border-color:var(--mint);color:var(--mint);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px);}to{opacity:1;transform:translateY(0);}}
+
+/* ── SECTIONS ── */
+section{padding:6rem 2rem;position:relative;z-index:10;}
+.section-inner{max-width:1080px;margin:0 auto;}
+.section-label{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mint);margin-bottom:.5rem;}
+.section-title{
+  font-family:'Cinzel Decorative',serif;font-size:clamp(1.4rem,3.5vw,2.2rem);
+  font-weight:400;color:var(--cream);margin-bottom:.9rem;line-height:1.3;
+}
+.section-lead{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:1.1rem;color:var(--skylt);line-height:1.75;margin-bottom:2.5rem;max-width:580px;
+}
+.divider{
+  width:50px;height:1.5px;
+  background:linear-gradient(90deg,var(--violet),var(--sky));
+  margin-bottom:2.5rem;border-radius:2px;
+}
+
+/* glass card */
+.glass{
+  background:rgba(19,16,43,0.65);
+  border:1px solid rgba(163,140,230,0.14);
+  border-radius:14px;
+  backdrop-filter:blur(8px);
+  transition:border-color .25s,transform .2s;
+}
+.glass:hover{border-color:rgba(91,174,232,0.3);transform:translateY(-3px);}
+
+/* ── ABOUT ── */
+.about-grid{display:grid;grid-template-columns:1fr 2fr;gap:3.5rem;align-items:start;}
+.about-portrait{
+  aspect-ratio:3/4;border-radius:16px;
+  background:linear-gradient(145deg,var(--plum),var(--deep));
+  border:1px solid rgba(163,140,230,0.2);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.about-portrait img{width:100%;height:100%;object-fit:cover;border-radius:16px;display:block;}
+.portrait-placeholder{font-size:4rem;position:relative;z-index:1;}
+.portrait-hint{position:absolute;bottom:1rem;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(163,140,230,.4);}
+.about-portrait::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 35% 30%,rgba(195,174,232,0.12),transparent 65%);pointer-events:none;}
+.about-text p{font-size:1rem;line-height:1.9;color:rgba(240,236,255,.7);margin-bottom:1.1rem;}
+.about-tags{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.5rem;}
+.tag{padding:.32rem .85rem;border-radius:20px;font-size:.75rem;letter-spacing:.07em;border:1px solid rgba(91,174,232,0.3);color:var(--skylt);}
+
+/* ── WORDS ── */
+.poems-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.2rem;}
+.poem-card{padding:1.6rem 1.4rem;cursor:pointer;}
+.poem-type{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--periwinkle);margin-bottom:.6rem;}
+.poem-title{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--cream);margin-bottom:.3rem;}
+.poem-meta{font-size:.8rem;color:rgba(163,140,230,.6);font-style:italic;}
+
+/* ── SOUNDS ── */
+.sounds-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;}
+.play-btn{display:flex;align-items:center;gap:.55rem;font-size:.75rem;letter-spacing:.09em;text-transform:uppercase;color:var(--sky);background:none;border:none;cursor:pointer;padding:0;transition:gap .2s,color .2s;margin-top:.6rem;}
+.play-btn:hover{gap:.85rem;color:var(--mint);}
+.play-circle{width:30px;height:30px;border-radius:50%;border:1px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:.65rem;flex-shrink:0;}
+
+/* ── VIDEO ── */
+.video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.3rem;}
+.video-thumb{
+  aspect-ratio:16/9;border-radius:12px;
+  border:1px solid rgba(163,140,230,0.15);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;cursor:pointer;
+  transition:border-color .2s;
+  background:linear-gradient(135deg,rgba(61,34,112,0.6),rgba(13,10,26,0.8));
+}
+.video-thumb:hover{border-color:rgba(91,174,232,0.4);}
+.video-thumb::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(107,63,160,0.3),transparent 70%);}
+.v-play{width:52px;height:52px;border-radius:50%;background:rgba(240,236,255,0.1);border:1.5px solid rgba(240,236,255,0.45);display:flex;align-items:center;justify-content:center;font-size:1.1rem;z-index:1;transition:all .2s;}
+.video-thumb:hover .v-play{background:rgba(91,174,232,0.18);border-color:var(--sky);transform:scale(1.08);}
+.v-label{position:absolute;bottom:0;left:0;right:0;padding:.7rem 1rem;background:linear-gradient(0deg,rgba(13,10,26,.9),transparent);font-size:.82rem;color:var(--cream);z-index:1;}
+
+/* ── HIRE ── */
+.hire-intro{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--skylt);line-height:1.8;margin-bottom:2.5rem;max-width:620px;}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1.1rem;margin-bottom:3rem;}
+.service-card{padding:1.4rem;}
+.svc-icon{font-size:1.4rem;margin-bottom:.7rem;}
+.svc-name{font-family:'Cinzel Decorative',serif;font-size:.78rem;color:var(--cream);margin-bottom:.45rem;}
+.svc-desc{font-size:.82rem;color:rgba(240,236,255,.5);line-height:1.65;}
+.contact-box{
+  background:rgba(19,16,43,0.75);border-radius:16px;
+  border:1px solid rgba(163,140,230,0.18);
+  padding:2.5rem;max-width:660px;margin:0 auto;
+}
+.contact-box h3{font-family:'Cinzel Decorative',serif;font-size:1rem;color:var(--cream);margin-bottom:.6rem;}
+.contact-lead{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--skylt);font-size:1rem;line-height:1.7;margin-bottom:1.8rem;}
+.cf{display:flex;flex-direction:column;gap:.85rem;}
+.cf input,.cf textarea,.cf select{
+  background:rgba(61,34,112,0.22);border:1px solid rgba(163,140,230,0.22);
+  border-radius:8px;padding:.78rem 1rem;
+  color:var(--cream);font-family:'Nunito',sans-serif;font-size:.88rem;
+  outline:none;transition:border-color .2s;width:100%;
+}
+.cf input::placeholder,.cf textarea::placeholder{color:rgba(163,140,230,.4);}
+.cf input:focus,.cf textarea:focus,.cf select:focus{border-color:rgba(91,174,232,.5);}
+.cf textarea{resize:vertical;min-height:105px;}
+.cf select option{background:#13102b;color:var(--cream);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:.85rem;}
+.cf-submit{
+  align-self:flex-end;padding:.82rem 2rem;border-radius:40px;
+  background:linear-gradient(135deg,var(--violet),var(--sky));
+  color:#fff;font-family:'Nunito',sans-serif;font-size:.83rem;letter-spacing:.1em;
+  text-transform:uppercase;border:none;cursor:pointer;
+  transition:transform .2s,box-shadow .2s;
+}
+.cf-submit:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(91,174,232,.28);}
+
+/* ── CONTACT PAGE ── */
+#contact-page{min-height:100vh;padding-top:7rem;position:relative;z-index:10;}
+.contact-pg-inner{max-width:680px;margin:0 auto;padding:0 2rem 6rem;}
+.contact-pg-photo{
+  width:160px;height:160px;border-radius:50%;
+  background:linear-gradient(145deg,var(--plum),var(--deep));
+  border:2px solid rgba(163,140,230,0.25);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 2rem;position:relative;overflow:hidden;
+}
+.contact-pg-photo img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;}
+.contact-pg-name{font-family:'Cinzel Decorative',serif;font-size:1.5rem;text-align:center;color:var(--cream);margin-bottom:.3rem;}
+.contact-pg-brand{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;text-align:center;color:var(--lavender);margin-bottom:2.5rem;letter-spacing:.08em;}
+.contact-pg-box{padding:2rem 2.5rem;}
+.contact-row{display:flex;align-items:center;gap:1rem;padding:1rem 0;border-bottom:1px solid rgba(163,140,230,.1);}
+.contact-row:last-child{border-bottom:none;}
+.c-icon{width:36px;height:36px;border-radius:50%;background:rgba(61,34,112,.4);border:1px solid rgba(163,140,230,.2);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;}
+.c-label{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mint);margin-bottom:.18rem;}
+.c-val{font-size:.95rem;color:var(--cream);}
+.c-val a{color:var(--skylt);text-decoration:none;transition:color .2s;}
+.c-val a:hover{color:var(--mint);}
+.back-link{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--lavender);text-decoration:none;margin-bottom:2rem;transition:color .2s;cursor:pointer;background:none;border:none;padding:0;}
+.back-link:hover{color:var(--mint);}
+
+/* ── SOUND UPLOAD CARDS ── */
+.sound-card{padding:1.5rem;}
+.sc-type{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mint);margin-bottom:.5rem;}
+.sc-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--cream);margin-bottom:.9rem;}
+.drop-zone{
+  border:1.5px dashed rgba(163,140,230,0.3);
+  border-radius:10px;padding:1.2rem 1rem;
+  text-align:center;cursor:pointer;
+  transition:border-color .2s,background .2s;
+  position:relative;
+}
+.drop-zone:hover,.drop-zone.drag-over{
+  border-color:rgba(91,174,232,0.6);
+  background:rgba(91,174,232,0.05);
+}
+.drop-zone input[type=file]{
+  position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;
+}
+.drop-icon{font-size:1.3rem;opacity:.4;margin-bottom:.4rem;}
+.drop-label{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--lavender);opacity:.6;}
+.drop-sub{font-size:.68rem;color:rgba(163,140,230,.35);margin-top:.25rem;font-style:italic;font-family:'Cormorant Garamond',serif;}
+.audio-ready{display:none;margin-top:.6rem;}
+.audio-ready audio{width:100%;height:32px;accent-color:var(--mint);}
+.audio-filename{font-size:.72rem;color:var(--mint);margin-bottom:.4rem;letter-spacing:.05em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+/* ── COMING SOON ── */
+.coming-soon{
+  display:flex;align-items:center;gap:.75rem;
+  padding:.7rem 1.1rem;border-radius:30px;
+  border:1px solid rgba(163,140,230,0.2);
+  background:rgba(61,34,112,0.15);
+  width:fit-content;margin-top:1rem;
+}
+.cs-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--mint);opacity:.7;flex-shrink:0;
+  animation:csPulse 2.2s ease-in-out infinite;
+}
+@keyframes csPulse{0%,100%{opacity:.3;transform:scale(1);}50%{opacity:.9;transform:scale(1.25);}}
+.cs-text{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--lavender);opacity:.8;}
+.cs-sub{font-size:.72rem;color:rgba(163,140,230,.45);margin-top:.25rem;font-style:italic;font-family:'Cormorant Garamond',serif;}
+
+/* ── FOOTER ── */
+footer{text-align:center;padding:2.5rem 2rem;position:relative;z-index:10;border-top:1px solid rgba(163,140,230,0.1);}
+.footer-logo{font-family:'Cinzel Decorative',serif;font-size:.9rem;letter-spacing:.08em;background:linear-gradient(120deg,var(--lavender),var(--sky),var(--mint));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.5rem;}
+footer p{font-size:.75rem;color:rgba(163,140,230,.38);letter-spacing:.06em;}
+footer span{color:var(--mint);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:700px){
+  nav{padding:1rem 1.3rem;}
+  .nav-links{gap:1rem;}
+  .nav-links a{font-size:.68rem;}
+  .about-grid{grid-template-columns:1fr;}
+  .about-portrait{max-width:200px;aspect-ratio:1/1;}
+  .form-row{grid-template-columns:1fr;}
+  .contact-box{padding:1.5rem;}
+  .contact-pg-box{padding:1.5rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- MAGICAL BACKGROUND -->
+<div id="magic-bg">
+  <canvas id="magic-canvas"></canvas>
+  <div id="sym-layer"></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" onclick="showMain()">Mirthmancer</div>
+  <div class="nav-links">
+    <a onclick="showMain('words')">Words</a>
+    <a onclick="showMain('sounds')">Sounds</a>
+    <a onclick="showMain('videos')">Video</a>
+    <a onclick="showMain('hire')">Work With Me</a>
+    <a onclick="showContact()" class="nav-contact-btn">Contact</a>
+  </div>
+</nav>
+
+<!-- ═══════════ MAIN PAGE ═══════════ -->
+<div id="main-page" class="page active">
+
+<!-- HERO -->
+<section id="hero">
+  <h1 class="hero-name">Mirthmancer</h1>
+  <div class="hero-subtitle">Bard &nbsp;·&nbsp; Philocalist &nbsp;·&nbsp; Truth-seeker</div>
+  <div class="hero-tagline">
+    <span>Spinning riddles of peace and levity.</span>
+    <span>Conjuring currents of chaos and clarity.</span>
+    <span>Weaving rhythms of whimsy and honesty.</span>
+    <span>Distilling the essence of all that moves me.</span>
+  </div>
+  <div class="hero-cta">
+    <button class="btn-primary" onclick="showMain('sounds')">Hear My Voice</button>
+    <button class="btn-ghost" onclick="showMain('hire')">Work With Me</button>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+
+      <div class="about-portrait">
+        <!--
+          TO ADD YOUR PHOTO:
+          Replace the two lines below with:
+          <img src="your-photo.jpg" alt="Kevin Cullinan — Mirthmancer">
+          (put your photo file in the same folder as this HTML file)
+        -->
+        <span class="portrait-placeholder">🜲</span>
+        <div class="portrait-hint">Your photo here</div>
+      </div>
+
+      <div class="about-text">
+        <div class="section-label">The Mirthmancer</div>
+        <h2 class="section-title">Bard. Philocalist.<br>Truth-seeker.</h2>
+        <div class="divider"></div>
+        <p>Welcome to a space suspended between the playful and the profound, where a well-placed word may unravel something you didn't know was tangled within you. I find myself constantly reaching deeper to discover the secrets hidden inside us.</p>
+        <p>My hope is that by entering my world and embracing my perspective, you learn something about your own existence.</p>
+        <p>My work spans poetry, lyrics, spoken word, and song. Whether I'm narrating a story, bringing a character to life, reading poetry, or performing original music, I bring warmth, curiosity, and intention with every breath.</p>
+        <div class="about-tags">
+          <span class="tag">Spoken Word</span>
+          <span class="tag">Voice Acting</span>
+          <span class="tag">Audiobooks</span>
+          <span class="tag">Original Music</span>
+          <span class="tag">Poetry</span>
+          <span class="tag">Storytelling</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORDS -->
+<section id="words">
+  <div class="section-inner">
+    <div class="section-label">Written Work</div>
+    <h2 class="section-title">Words</h2>
+    <p class="section-lead">These poems exist in print and live in my lungs.<br>Read them, then hear them.</p>
+    <div class="divider"></div>
+    <div class="poems-grid">
+      <div class="poem-card glass">
+        <div class="poem-type">Original Poem · Spoken Word</div>
+        <div class="poem-title">Cherish the Ride</div>
+        <div class="poem-meta">spoken word performance</div>
+        <div class="coming-soon">
+          <div class="cs-dot"></div>
+          <div><div class="cs-text">Recording coming soon</div><div class="cs-sub">The words exist. The mic is warming up.</div></div>
+        </div>
+      </div>
+      <div class="poem-card glass">
+        <div class="poem-type">Original Poem · Spoken Word</div>
+        <div class="poem-title">Ego Death</div>
+        <div class="poem-meta">spoken word performance</div>
+        <div class="coming-soon">
+          <div class="cs-dot"></div>
+          <div><div class="cs-text">Recording coming soon</div><div class="cs-sub">The words exist. The mic is warming up.</div></div>
+        </div>
+      </div>
+      <div class="poem-card glass">
+        <div class="poem-type">Original Poem · Spoken Word</div>
+        <div class="poem-title">Transmogrified</div>
+        <div class="poem-meta">spoken word performance</div>
+        <div class="coming-soon">
+          <div class="cs-dot"></div>
+          <div><div class="cs-text">Recording coming soon</div><div class="cs-sub">The words exist. The mic is warming up.</div></div>
+        </div>
+      </div>
+      <div class="poem-card glass">
+        <div class="poem-type">Original Poem · Spoken Word</div>
+        <div class="poem-title">Sterling Hypnosis</div>
+        <div class="poem-meta">spoken word performance</div>
+        <div class="coming-soon">
+          <div class="cs-dot"></div>
+          <div><div class="cs-text">Recording coming soon</div><div class="cs-sub">The words exist. The mic is warming up.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOUNDS -->
+<section id="sounds">
+  <div class="section-inner">
+    <div class="section-label">Voice Portfolio</div>
+    <h2 class="section-title">Sounds</h2>
+    <p class="section-lead">Magicians may never reveal their secrets, but that's exactly what I'm doing here.<br>If my voice makes you feel something, then my spells are working.</p>
+    <div class="divider"></div>
+    <div class="sounds-grid" id="sounds-grid">
+      <div class="sound-card glass">
+        <div class="sc-type">Original Music · Song</div>
+        <div class="sc-title">Layers</div>
+        <div class="drop-zone" id="dz-0">
+          <input type="file" id="fi-0" accept="audio/*">
+          <div class="drop-icon">🎵</div>
+          <div class="drop-label">Drop audio file here</div>
+          <div class="drop-sub">or click to browse · mp3, wav, m4a</div>
+        </div>
+        <div class="coming-soon" style="margin-top:.85rem;">
+          <div class="cs-dot"></div>
+          <div><div class="cs-text">Coming soon</div><div class="cs-sub">The spell is still being bottled.</div></div>
+        </div>
+        <div class="audio-ready" id="ar-0"><div class="audio-filename" id="fn-0"></div><audio id="aud-0" controls></audio></div>
+      </div>
+      <div class="sound-card glass">
+        <div class="sc-type">Original Music · Song</div>
+        <div class="sc-title">Comets</div>
+        <div class="drop-zone" id="dz-1">
+          <input type="file" id="fi-1" accept="audio/*">
+          <div class="drop-icon">🎵</div>
+          <div class="drop-label">Drop audio file here</div>
+          <div class="drop-sub">or click to browse · mp3, wav, m4a</div>
+        </div>
+        <div class="coming-soon" style="margin-top:.85rem;">
+          <div class="cs-dot"></div>
+          <div><div class="cs-text">Coming soon</div><div class="cs-sub">The spell is still being bottled.</div></div>
+        </div>
+        <div class="audio-ready" id="ar-1"><div class="audio-filename" id="fn-1"></div><audio id="aud-1" controls></audio></div>
+      </div>
+      <div class="sound-card glass">
+        <div class="sc-type">Original Music · Song</div>
+        <div class="sc-title">Elements</div>
+        <div class="drop-zone" id="dz-2">
+          <input type="file" id="fi-2" accept="audio/*">
+          <div class="drop-icon">🎵</div>
+          <div class="drop-label">Drop audio file here</div>
+          <div class="drop-sub">or click to browse · mp3, wav, m4a</div>
+        </div>
+        <div class="coming-soon" style="margin-top:.85rem;">
+          <div class="cs-dot"></div>
+          <div><div class="cs-text">Coming soon</div><div class="cs-sub">The spell is still being bottled.</div></div>
+        </div>
+        <div class="audio-ready" id="ar-2"><div class="audio-filename" id="fn-2"></div><audio id="aud-2" controls></audio></div>
+      </div>
+      <div class="sound-card glass">
+        <div class="sc-type">Original Music · Song</div>
+        <div class="sc-title">Tethered</div>
+        <div class="drop-zone" id="dz-3">
+          <input type="file" id="fi-3" accept="audio/*">
+          <div class="drop-icon">🎵</div>
+          <div class="drop-label">Drop audio file here</div>
+          <div class="drop-sub">or click to browse · mp3, wav, m4a</div>
+        </div>
+        <div class="coming-soon" style="margin-top:.85rem;">
+          <div class="cs-dot"></div>
+          <div><div class="cs-text">Coming soon</div><div class="cs-sub">The spell is still being bottled.</div></div>
+        </div>
+        <div class="audio-ready" id="ar-3"><div class="audio-filename" id="fn-3"></div><audio id="aud-3" controls></audio></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEOS -->
+<section id="videos">
+  <div class="section-inner">
+    <div class="section-label">Performances</div>
+    <h2 class="section-title">Videos</h2>
+    <p class="section-lead">I'm told my eyebrows do most of the talking.</p>
+    <div class="divider"></div>
+    <div class="video-grid">
+      <!--
+        TO EMBED A YOUTUBE VIDEO, replace a .video-thumb div with:
+        <div style="aspect-ratio:16/9;border-radius:12px;overflow:hidden;">
+          <iframe width="100%" height="100%"
+            src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+            frameborder="0" allowfullscreen></iframe>
+        </div>
+      -->
+      <div class="video-thumb">
+        <div style="position:relative;z-index:1;text-align:center;">
+          <div style="font-size:1.8rem;margin-bottom:.5rem;opacity:.4;">▶</div>
+          <div class="coming-soon" style="margin:0 auto;">
+            <div class="cs-dot"></div>
+            <div><div class="cs-text">Coming soon</div></div>
+          </div>
+        </div>
+        <div class="v-label"></div>
+      </div>
+      <div class="video-thumb" style="background:linear-gradient(135deg,rgba(91,174,232,0.12),rgba(13,10,26,.8));">
+        <div style="position:relative;z-index:1;text-align:center;">
+          <div style="font-size:1.8rem;margin-bottom:.5rem;opacity:.4;">▶</div>
+          <div class="coming-soon" style="margin:0 auto;">
+            <div class="cs-dot"></div>
+            <div><div class="cs-text">Coming soon</div></div>
+          </div>
+        </div>
+        <div class="v-label"></div>
+      </div>
+      <div class="video-thumb" style="background:linear-gradient(135deg,rgba(93,214,184,0.1),rgba(19,16,43,.8));">
+        <div style="position:relative;z-index:1;text-align:center;">
+          <div style="font-size:1.8rem;margin-bottom:.5rem;opacity:.4;">▶</div>
+          <div class="coming-soon" style="margin:0 auto;">
+            <div class="cs-dot"></div>
+            <div><div class="cs-text">Coming soon</div></div>
+          </div>
+        </div>
+        <div class="v-label"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HIRE -->
+<section id="hire">
+  <div class="section-inner">
+    <div class="section-label">Work With Me</div>
+    <h2 class="section-title" style="display:none;"></h2>
+    <p class="hire-intro">If my voice resonates with you, let's see how our frequencies harmonize.<br>Together, we'll make something worth hearing.</p>
+    <div class="divider"></div>
+    <div class="services-grid">
+      <div class="service-card glass">
+        <div class="svc-icon">🎵</div>
+        <div class="svc-name">Music &amp; Song</div>
+        <div class="svc-desc">Original songs, collaborations, vocal features — where rhythm meets meaning.</div>
+      </div>
+      <div class="service-card glass">
+        <div class="svc-icon">✦</div>
+        <div class="svc-name">Original Poetry</div>
+        <div class="svc-desc">Commissions for events, gifts, campaigns — anything that needs a few true words.</div>
+      </div>
+      <div class="service-card glass">
+        <div class="svc-icon">🎙</div>
+        <div class="svc-name">Voice Acting</div>
+        <div class="svc-desc">Characters, narration, commercial reads — I find the truth in every voice.</div>
+      </div>
+      <div class="service-card glass">
+        <div class="svc-icon">📖</div>
+        <div class="svc-name">Audio Books</div>
+        <div class="svc-desc">Long-form narration with stamina, clarity, and warmth across every chapter.</div>
+      </div>
+    </div>
+
+    <div class="contact-box">
+      <h3>Start a Conversation ✦</h3>
+      <p class="contact-lead">Tell me what you're making. I'd love to hear about it.</p>
+      <!--
+        TO MAKE THIS FORM ACTUALLY SEND EMAILS:
+        1. Create a free account at formspree.io
+        2. Create a new form and get your form ID
+        3. Change the opening tag below to:
+           <form class="cf" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        4. Change the closing </div> to </form>
+      -->
+      <div class="cf">
+        <div class="form-row">
+          <input type="text" name="name" placeholder="Your name">
+          <input type="email" name="email" placeholder="Your email">
+        </div>
+        <select name="service">
+          <option value="" disabled selected>What are you looking for?</option>
+          <option>Music / Song Collaboration</option>
+          <option>Original Poetry</option>
+          <option>Voice Acting</option>
+          <option>Audiobook Narration</option>
+          <option>Something Else</option>
+        </select>
+        <textarea name="message" placeholder="Tell me about your project — the weirder the better."></textarea>
+        <button type="submit" class="cf-submit">Send It ✦</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Mirthmancer</div>
+  <p>Crafted with intention &nbsp;·&nbsp; <span>✦</span> &nbsp;·&nbsp; All work original &amp; rights reserved</p>
+</footer>
+
+</div><!-- /main-page -->
+
+<!-- ═══════════ CONTACT PAGE ═══════════ -->
+<div id="contact-page" class="page">
+  <div class="contact-pg-inner">
+    <button class="back-link" onclick="showMain()">← Back</button>
+
+    <div class="contact-pg-photo">
+      <!--
+        TO ADD YOUR PHOTO HERE:
+        Replace the span below with:
+        <img src="your-photo.jpg" alt="Kevin Cullinan">
+      -->
+      <span style="font-size:3rem;position:relative;z-index:1;">🜲</span>
+    </div>
+
+    <div class="contact-pg-name">Kevin Cullinan</div>
+    <div class="contact-pg-brand">Mirthmancer — Bard · Philocalist · Truth-seeker</div>
+
+    <div class="contact-pg-box glass">
+      <div class="contact-row">
+        <div class="c-icon">📞</div>
+        <div>
+          <div class="c-label">Phone</div>
+          <div class="c-val"><a href="tel:6105639776">610-563-9776</a></div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="c-icon">✉</div>
+        <div>
+          <div class="c-label">Personal Email</div>
+          <div class="c-val"><a href="/cdn-cgi/l/email-protection#78131d0e1116081b0d141411161916381f15191114561b1715"><span class="__cf_email__" data-cfemail="402b2536292e3023352c2c292e212e00272d21292c6e232f2d">[email&#160;protected]</span></a></div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="c-icon">✦</div>
+        <div>
+          <div class="c-label">Mirthmancer Email</div>
+          <div class="c-val"><a href="/cdn-cgi/l/email-protection#e4908c81898d96908c89858a878196a48389858d88ca878b89"><span class="__cf_email__" data-cfemail="f4809c91999d86809c99959a979186b49399959d98da979b99">[email&#160;protected]</span></a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SCRIPTS ═══════════ -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ── PAGE NAVIGATION ──
+function showContact(){
+  document.getElementById('main-page').classList.remove('active');
+  document.getElementById('contact-page').classList.add('active');
+  window.scrollTo(0,0);
+}
+function showMain(anchor){
+  document.getElementById('contact-page').classList.remove('active');
+  document.getElementById('main-page').classList.add('active');
+  if(anchor){
+    setTimeout(()=>{
+      const el=document.getElementById(anchor);
+      if(el) el.scrollIntoView({behavior:'smooth'});
+    },50);
+  } else {
+    window.scrollTo(0,0);
+  }
+}
+
+// ── SOUNDS DRAG & DROP ──
+[0,1,2,3].forEach(i=>{
+  const dz=document.getElementById('dz-'+i);
+  const input=document.getElementById('fi-'+i);
+  const ar=document.getElementById('ar-'+i);
+  const fn=document.getElementById('fn-'+i);
+  const aud=document.getElementById('aud-'+i);
+  const cs=dz.closest('.sound-card').querySelector('.coming-soon');
+
+  function loadFile(file){
+    if(!file||!file.type.startsWith('audio/')) return;
+    aud.src=URL.createObjectURL(file);
+    fn.textContent=file.name;
+    ar.style.display='block';
+    cs.style.display='none';
+    dz.style.borderColor='rgba(93,214,184,0.5)';
+    dz.querySelector('.drop-icon').textContent='✓';
+    dz.querySelector('.drop-label').textContent='File loaded';
+    dz.querySelector('.drop-sub').textContent='Drop a new file to replace';
+  }
+  input.addEventListener('change',e=>loadFile(e.target.files[0]));
+  dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag-over');});
+  dz.addEventListener('dragleave',()=>dz.classList.remove('drag-over'));
+  dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag-over');loadFile(e.dataTransfer.files[0]);});
+});
+
+// ── MAGICAL CANVAS BACKGROUND ──
+const canvas=document.getElementById('magic-canvas');
+const ctx=canvas.getContext('2d');
+let W,H;
+function resize(){
+  W=canvas.width=window.innerWidth;
+  H=canvas.height=window.innerHeight;
+}
+window.addEventListener('resize',()=>{resize();drawStatic();});
+resize();
+
+function drawStatic(){
+  ctx.clearRect(0,0,W,H);
+  const bg=ctx.createLinearGradient(0,0,W,H);
+  bg.addColorStop(0,'#0d0a1a');
+  bg.addColorStop(0.4,'#13102b');
+  bg.addColorStop(0.7,'#0e1428');
+  bg.addColorStop(1,'#0a1220');
+  ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+
+  const nebulae=[
+    {x:W*.15,y:H*.12,rx:W*.35,ry:H*.18,c:'rgba(107,63,160,0.18)'},
+    {x:W*.82,y:H*.2,rx:W*.28,ry:H*.15,c:'rgba(91,174,232,0.13)'},
+    {x:W*.5,y:H*.5,rx:W*.4,ry:H*.2,c:'rgba(61,34,112,0.15)'},
+    {x:W*.1,y:H*.7,rx:W*.3,ry:H*.15,c:'rgba(93,214,184,0.07)'},
+    {x:W*.85,y:H*.75,rx:W*.3,ry:H*.18,c:'rgba(107,63,160,0.12)'},
+  ];
+  nebulae.forEach(n=>{
+    const grd=ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,Math.max(n.rx,n.ry));
+    grd.addColorStop(0,n.c);grd.addColorStop(1,'transparent');
+    ctx.save();ctx.scale(1,n.ry/n.rx);
+    ctx.beginPath();ctx.arc(n.x,n.y*(n.rx/n.ry),n.rx,0,Math.PI*2);
+    ctx.fillStyle=grd;ctx.fill();ctx.restore();
+  });
+
+  for(let i=0;i<280;i++){
+    const x=Math.random()*W,y=Math.random()*H;
+    const r=Math.random()*1.4+.3;
+    const a=Math.random()*.7+.15;
+    const cols=['rgba(195,174,232,'+a+')','rgba(168,212,245,'+a+')','rgba(255,255,255,'+a+')','rgba(93,214,184,'+a+')'];
+    ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);
+    ctx.fillStyle=cols[Math.floor(Math.random()*cols.length)];ctx.fill();
+  }
+}
+drawStatic();
+
+// ── FLOATING SYMBOLS ──
+const symbols={
+  olive:`<svg viewBox="0 0 40 60" xmlns="http://www.w3.org/2000/svg"><path d="M20 55 Q20 30 20 5" stroke="#8aaa55" stroke-width="1.5" fill="none"/><ellipse cx="14" cy="22" rx="5" ry="8" fill="#7a9e45" opacity=".8" transform="rotate(-25,14,22)"/><ellipse cx="26" cy="32" rx="5" ry="8" fill="#6a8e35" opacity=".7" transform="rotate(20,26,32)"/><ellipse cx="13" cy="42" rx="4" ry="7" fill="#7a9e45" opacity=".75" transform="rotate(-15,13,42)"/><circle cx="22" cy="18" r="3" fill="#5a7a2a" opacity=".6"/><circle cx="15" cy="35" r="2.5" fill="#4a6a1a" opacity=".55"/></svg>`,
+  delphinium:`<svg viewBox="0 0 30 70" xmlns="http://www.w3.org/2000/svg"><line x1="15" y1="65" x2="15" y2="5" stroke="#6b8cd4" stroke-width="1.5"/><g transform="translate(15,12)"><ellipse rx="5" ry="7" fill="#7b9ee8" opacity=".85" transform="rotate(-20)"/><ellipse rx="5" ry="7" fill="#8aaef8" opacity=".8" transform="translate(0,10) rotate(20)"/><ellipse rx="4" ry="6" fill="#9bbeff" opacity=".75" transform="translate(0,22) rotate(-10)"/><ellipse rx="4" ry="6" fill="#7b9ee8" opacity=".7" transform="translate(0,33) rotate(15)"/><circle cy="-2" r="3" fill="#c8d8ff" opacity=".9"/></g></svg>`,
+  rooster:`<svg viewBox="0 0 50 60" xmlns="http://www.w3.org/2000/svg"><ellipse cx="30" cy="38" rx="14" ry="10" fill="#2d1060" opacity=".85"/><circle cx="30" cy="24" r="9" fill="#3d1a80" opacity=".9"/><path d="M30 15 Q28 8 24 5 Q28 7 30 4 Q32 7 36 5 Q32 8 30 15Z" fill="#a03080" opacity=".9"/><path d="M39 24 Q45 18 48 20 Q44 24 48 28 Q43 26 39 28Z" fill="#cc5599" opacity=".8"/><path d="M26 28 L22 32 L24 34 L28 30Z" fill="#ff3355" opacity=".9"/><circle cx="33" cy="21" r="2" fill="#f0e8ff" opacity=".95"/><circle cx="33.7" cy="20.5" r=".8" fill="#1a0040"/><path d="M30 46 L24 58 M30 46 L30 58 M30 46 L36 58" stroke="#8060cc" stroke-width="1.5" fill="none"/></svg>`,
+  bear:`<svg viewBox="0 0 55 55" xmlns="http://www.w3.org/2000/svg"><ellipse cx="27" cy="32" rx="16" ry="14" fill="#1a1025" opacity=".9"/><circle cx="27" cy="21" r="11" fill="#231535" opacity=".9"/><circle cx="19" cy="13" r="6" fill="#1a1025" opacity=".9"/><circle cx="35" cy="13" r="6" fill="#1a1025" opacity=".9"/><ellipse cx="27" cy="26" rx="5" ry="3.5" fill="#2d1d40" opacity=".85"/><circle cx="23" cy="20" r="2" fill="#e8d8ff" opacity=".9"/><circle cx="31" cy="20" r="2" fill="#e8d8ff" opacity=".9"/><circle cx="23.6" cy="19.6" r=".9" fill="#1a0030"/><circle cx="31.6" cy="19.6" r=".9" fill="#1a0030"/><ellipse cx="27" cy="50" rx="12" ry="8" fill="#1a1025" opacity=".85"/></svg>`,
+  peace:`<svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg"><circle cx="22" cy="22" r="19" fill="none" stroke="#89c4e1" stroke-width="2" opacity=".75"/><line x1="22" y1="3" x2="22" y2="41" stroke="#89c4e1" stroke-width="2" opacity=".75"/><line x1="22" y1="22" x2="7" y2="36" stroke="#89c4e1" stroke-width="2" opacity=".75"/><line x1="22" y1="22" x2="37" y2="36" stroke="#89c4e1" stroke-width="2" opacity=".75"/></svg>`,
+  potion:`<svg viewBox="0 0 36 50" xmlns="http://www.w3.org/2000/svg"><rect x="14" y="3" width="8" height="9" rx="2" fill="#8060b0" opacity=".8"/><path d="M10 12 Q4 22 4 32 Q4 46 18 46 Q32 46 32 32 Q32 22 26 12Z" fill="#6030a0" opacity=".8"/><ellipse cx="18" cy="28" rx="6" ry="4" fill="#c080ff" opacity=".5"/><circle cx="13" cy="22" r="2" fill="#e0b0ff" opacity=".55"/><circle cx="23" cy="35" r="1.5" fill="#d0a0ff" opacity=".5"/></svg>`,
+  dust:`<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="2" fill="#e8d060" opacity=".9"/><circle cx="12" cy="15" r="1.2" fill="#c8e0f0" opacity=".7"/><circle cx="28" cy="14" r="1" fill="#d0c0ff" opacity=".75"/><circle cx="8" cy="26" r=".8" fill="#a0e8d0" opacity=".65"/><circle cx="30" cy="28" r="1.1" fill="#e8c0ff" opacity=".7"/><circle cx="16" cy="32" r=".9" fill="#c8e8a0" opacity=".6"/><circle cx="26" cy="8" r=".7" fill="#f0d880" opacity=".65"/><path d="M19 17 L20 20 L21 17 L20 14Z" fill="#ffd060" opacity=".8"/><path d="M17 20 L20 21 L17 22 L14 21Z" fill="#ffe080" opacity=".75"/><path d="M23 20 L20 21 L23 22 L26 21Z" fill="#ffd060" opacity=".75"/></svg>`,
+};
+const symNames=Object.keys(symbols);
+const symLayer=document.getElementById('sym-layer');
+function spawnSymbol(){
+  const name=symNames[Math.floor(Math.random()*symNames.length)];
+  const size=28+Math.random()*42;
+  const x=Math.random()*93;
+  const duration=18+Math.random()*28;
+  const opacity=(0.12+Math.random()*.22).toFixed(2);
+  const rot=(Math.random()*60-30)+'deg';
+  const el=document.createElement('div');
+  el.className='sym';
+  el.style.cssText=`position:fixed;left:${x}%;top:${(8+Math.random()*82)}%;width:${size}px;height:${size}px;--sym-op:${opacity};--sym-rot:${rot};ani
