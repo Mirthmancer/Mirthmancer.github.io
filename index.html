@@ -174,13 +174,58 @@ section{padding:6rem 2rem;position:relative;z-index:10;}
 .about-text p{font-size:1rem;line-height:1.9;color:rgba(240,236,255,.7);margin-bottom:1.1rem;}
 .about-tags{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.5rem;}
 .tag{padding:.32rem .85rem;border-radius:20px;font-size:.75rem;letter-spacing:.07em;border:1px solid rgba(91,174,232,0.3);color:var(--skylt);}
+.about-subsection{margin-top:2.2rem;}
+.about-subtitle{
+  font-family:'Cinzel Decorative',serif;
+  font-size:1.15rem;letter-spacing:.08em;
+  font-weight:700;
+  color:var(--skylt);margin-bottom:.55rem;
+}
+.about-subdivider{
+  height:1px;width:38px;
+  background:linear-gradient(90deg,var(--violet),var(--sky));
+  margin-bottom:1.1rem;border-radius:2px;opacity:.55;
+}
 
 /* ── WORDS ── */
-.poems-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.2rem;}
-.poem-card{padding:1.6rem 1.4rem;cursor:pointer;}
+.poems-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.2rem;align-items:start;}
+.poem-card{padding:1.6rem 1.4rem;}
 .poem-type{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--periwinkle);margin-bottom:.6rem;}
-.poem-title{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--cream);margin-bottom:.3rem;}
+.poem-head{
+  display:flex;align-items:center;justify-content:space-between;gap:.6rem;
+  width:100%;background:none;border:none;padding:0;margin:0 0 .3rem;
+  text-align:left;cursor:pointer;color:inherit;font:inherit;
+}
+.poem-head:focus-visible{outline:1px solid var(--sky);outline-offset:4px;border-radius:4px;}
+.poem-title{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--cream);transition:color .2s;}
+.poem-head:hover .poem-title{color:var(--mint);}
+.poem-chevron{
+  font-size:.85rem;color:var(--lavender);opacity:.55;
+  transition:transform .35s ease,opacity .2s;flex-shrink:0;
+}
+.poem-card[data-open="true"] .poem-chevron{transform:rotate(180deg);opacity:.9;}
+.poem-card[data-open="true"]{grid-column:1 / -1;border-color:rgba(91,174,232,0.3);}
 .poem-meta{font-size:.8rem;color:rgba(163,140,230,.6);font-style:italic;}
+.poem-audio{margin-top:1rem;}
+.poem-audio audio{width:100%;height:32px;accent-color:var(--mint);}
+.poem-body{
+  max-height:0;overflow:hidden;opacity:0;margin-top:0;
+  transition:max-height .45s ease,opacity .3s ease,margin-top .3s ease;
+}
+.poem-card[data-open="true"] .poem-body{
+  max-height:3000px;opacity:1;margin-top:1.4rem;
+}
+.poem-divider{
+  height:1px;width:40px;
+  background:linear-gradient(90deg,var(--violet),var(--sky));
+  margin:0 auto 1.4rem;border-radius:2px;opacity:.55;
+}
+.poem-text{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.05rem;line-height:1.85;color:rgba(240,236,255,.82);
+  max-width:620px;margin:0 auto;
+  white-space:pre-wrap;
+}
 
 /* ── SOUNDS ── */
 .sounds-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;}
@@ -336,6 +381,7 @@ footer span{color:var(--mint);}
 <nav>
   <div class="nav-logo" onclick="showMain()">Mirthmancer</div>
   <div class="nav-links">
+    <a onclick="showMain('about')">About</a>
     <a onclick="showMain('words')">Words</a>
     <a onclick="showMain('sounds')">Sounds</a>
     <a onclick="showMain('videos')">Video</a>
@@ -354,7 +400,6 @@ footer span{color:var(--mint);}
   <div class="hero-tagline">
     <span>Spinning riddles of peace and levity.</span>
     <span>Conjuring currents of chaos and clarity.</span>
-    <span>Weaving rhythms of whimsy and honesty.</span>
     <span>Distilling the essence of all that moves me.</span>
   </div>
   <div class="hero-cta">
@@ -380,19 +425,30 @@ footer span{color:var(--mint);}
       </div>
 
       <div class="about-text">
-        <div class="section-label">The Mirthmancer</div>
-        <h2 class="section-title">Bard. Philocalist.<br>Truth-seeker.</h2>
+        <h2 class="section-title">Mirthmancer</h2>
         <div class="divider"></div>
-        <p>Welcome to a space suspended between the playful and the profound, where a well-placed word may unravel something you didn't know was tangled within you. I find myself constantly reaching deeper to discover the secrets hidden inside us.</p>
-        <p>My hope is that by entering my world and embracing my perspective, you learn something about your own existence.</p>
-        <p>My work spans poetry, lyrics, spoken word, and song. Whether I'm narrating a story, bringing a character to life, reading poetry, or performing original music, I bring warmth, curiosity, and intention with every breath.</p>
-        <div class="about-tags">
-          <span class="tag">Spoken Word</span>
-          <span class="tag">Voice Acting</span>
-          <span class="tag">Audiobooks</span>
-          <span class="tag">Original Music</span>
-          <span class="tag">Poetry</span>
-          <span class="tag">Storytelling</span>
+        <p>Welcome to a space suspended between the playful and the profound, where a well-placed word may unravel something you didn't know was tangled within you.</p>
+
+        <div class="about-subsection">
+          <div class="about-subtitle">Bard</div>
+          <div class="about-subdivider"></div>
+          <p>My work spans poetry, lyrics, spoken word, and song.</p>
+          <p>Whether I'm narrating a story, bringing a character to life, reading poetry, or singing, I bring warmth, curiosity, and intention with every breath.</p>
+        </div>
+
+        <div class="about-subsection">
+          <div class="about-subtitle">Philocalist</div>
+          <div class="about-subdivider"></div>
+          <p>Our world is a place of immeasurable beauty.<br>
+          It's everywhere.<br>
+          I try to find it, especially where it's most scarce.</p>
+        </div>
+
+        <div class="about-subsection">
+          <div class="about-subtitle">Truth-seeker</div>
+          <div class="about-subdivider"></div>
+          <p>Nobody has all the answers, but there is a non-zero chance that every single soul you encounter has at least one of them. Listen to their story. Gain a new perspective. Learn their secrets.</p>
+          <p>My hope is this: by entering my world and immersing yourself in my experiences, you're able to make better sense of your own existence. At the very least, perhaps I'll make you giggle.</p>
         </div>
       </div>
     </div>
@@ -402,45 +458,177 @@ footer span{color:var(--mint);}
 <!-- WORDS -->
 <section id="words">
   <div class="section-inner">
-    <div class="section-label">Written Work</div>
     <h2 class="section-title">Words</h2>
     <p class="section-lead">These poems exist in print and live in my lungs.<br>Read them, then hear them.</p>
     <div class="divider"></div>
     <div class="poems-grid">
-      <div class="poem-card glass">
+      <div class="poem-card glass" data-open="false">
         <div class="poem-type">Original Poem · Spoken Word</div>
-        <div class="poem-title">Cherish the Ride</div>
+        <button class="poem-head" aria-expanded="false" aria-controls="poem-body-cherish">
+          <span class="poem-title">Cherish the Ride</span>
+          <span class="poem-chevron" aria-hidden="true">▾</span>
+        </button>
         <div class="poem-meta">spoken word performance</div>
-        <div class="coming-soon">
-          <div class="cs-dot"></div>
-          <div><div class="cs-text">Recording coming soon</div><div class="cs-sub">The words exist. The mic is warming up.</div></div>
+        <div class="poem-audio">
+          <audio controls preload="metadata">
+            <source src="Cherish%20the%20Ride.mp3" type="audio/mpeg">
+            Your browser doesn't support audio playback.
+          </audio>
+        </div>
+        <div class="poem-body" id="poem-body-cherish">
+          <div class="poem-divider"></div>
+          <div class="poem-text">This feeling, it's fickle - it comes &amp; it goes.
+Consuming our conscience &amp; curling our toes.
+The code is concealed - we covet its capture.
+We keep it too close for fear of a fracture.
+A trickle of triumph, a trapping of truths.
+It twists our desire &amp; blossoms our blooms.
+It's awesome - impossible - the warmth we can feel.
+Just pause before breaking the hearts that you steal.
+So easy to fall - we tumble, we trip.
+We stumble and crash when our feet start to slip.
+It rips through your rhythm, erasing your agency.
+Embracing the taste of their radiance aimlessly.
+(Tasting their radiance - embracing it aimlessly.)
+Your tongue becomes tied as you look into their eyes,
+and you're shook by their depth when they lower their guise.
+The soul, it will sing, when safety, you bring.
+Creating a place where your traps never spring.
+Expectation is wasted when placed on another.
+Accept or reject, but give grace to your lover.
+You are the only one you can control.
+Being yourselves is what coupled your souls.
+It's not about owning, postponing, possessing...
+It's sharing, it's daring to care, and caressing.
+The tenderness tries you, it bends, it breaks, and it binds you.
+Cherish the ride whenever love finds you.</div>
         </div>
       </div>
-      <div class="poem-card glass">
+      <div class="poem-card glass" data-open="false">
         <div class="poem-type">Original Poem · Spoken Word</div>
-        <div class="poem-title">Ego Death</div>
+        <button class="poem-head" aria-expanded="false" aria-controls="poem-body-ego">
+          <span class="poem-title">Ego Death</span>
+          <span class="poem-chevron" aria-hidden="true">▾</span>
+        </button>
         <div class="poem-meta">spoken word performance</div>
-        <div class="coming-soon">
-          <div class="cs-dot"></div>
-          <div><div class="cs-text">Recording coming soon</div><div class="cs-sub">The words exist. The mic is warming up.</div></div>
+        <div class="poem-audio">
+          <audio controls preload="metadata">
+            <source src="Ego%20Death.mp3" type="audio/mpeg">
+            Your browser doesn't support audio playback.
+          </audio>
+        </div>
+        <div class="poem-body" id="poem-body-ego">
+          <div class="poem-divider"></div>
+          <div class="poem-text">For years I tried to fit myself into another's box.
+Stifled tears &amp; rife with fear that I was not enough.
+Clocking in, another win to keep my spirit stocked.
+Finding purpose in my service, I strove to be a rock.
+Once my stone was thrown, I hadn't grown the way I thought.
+Scribbled lines and wasted time and lessons I forgot.
+I looked inside in hopes I'd find the answers that I sought.
+And when I failed, I blazed the trail to reap a finer plot.
+Soon I'd find it wasn't inside, but in the eyes of friends of mine.
+Old companions there to show the light I once possessed.
+Comrades, new, to share their truths and push me towards my best.
+Infused with grounding, love surrounding, my dreams could manifest.
+Then suddenly time was no longer wasted.
+I lived and I loved and I lost my taste.
+Erased my regret, and wisdom replaced it.
+Found greatness to love in myself, and embraced it.
+Spend all your time on skills you can hone,
+but life lacks meaning if you live it alone.
+Boldly show the ways you've grown
+And seek the people that feel like home.
+Now rise - protest - if life doesn't fit. Invest yourself in all that you give.
+Alone, we only hold one ticket to ride this world and try to live.
+So find your tribe and harmonize. Forgive your former enterprise.
+For only through each other's eyes may we get a glimpse of another life.</div>
         </div>
       </div>
-      <div class="poem-card glass">
+      <div class="poem-card glass" data-open="false">
         <div class="poem-type">Original Poem · Spoken Word</div>
-        <div class="poem-title">Transmogrified</div>
+        <button class="poem-head" aria-expanded="false" aria-controls="poem-body-transmogrified">
+          <span class="poem-title">Transmogrified</span>
+          <span class="poem-chevron" aria-hidden="true">▾</span>
+        </button>
         <div class="poem-meta">spoken word performance</div>
-        <div class="coming-soon">
-          <div class="cs-dot"></div>
-          <div><div class="cs-text">Recording coming soon</div><div class="cs-sub">The words exist. The mic is warming up.</div></div>
+        <div class="poem-audio">
+          <audio controls preload="metadata">
+            <source src="Transmogrified.mp3" type="audio/mpeg">
+            Your browser doesn't support audio playback.
+          </audio>
+        </div>
+        <div class="poem-body" id="poem-body-transmogrified">
+          <div class="poem-divider"></div>
+          <div class="poem-text">If a witch turned you into a mushroom, how would you be consumed?
+Harvested from the ground, would she eat you whole? Raw and profound with an uncooked soul?
+Perhaps dry you out and grind you to dust? Pour you into a capsule or bake you into crust?
+Boiled til bouncy or steeped in a tea? It's astounding all the fungal forms you could be.
+And then, let's consider what you might do! What sort of reaction would your powder produce?
+Will you make music louder or make her world rounder? What kinds of feelings does your essence induce?
+Does she feel confused? What spices did she use?
+The pungence and flavor derived from your abundance is something to savor - we strive for indulgence.
+Might your unfiltered culture cause splinters in her sculpture? Your unscripted structure may bewilder and touch her.
+Pilfer her mind for the secrets inside. Dissolving the wall that her damage designed.
+Exposing it all for her psyche to solve - she captured catharsis when you form was devolved.
+Don't fear the digestion as your pieces progress. You've dished out your service - why protest your purpose?
+You'll return to your form once you pass through her storm. Reformed with the earth to unite with your swarm.
+The process completed, your heart restarts beating. She honored her promise, and made you a treat.</div>
         </div>
       </div>
-      <div class="poem-card glass">
+      <div class="poem-card glass" data-open="false">
         <div class="poem-type">Original Poem · Spoken Word</div>
-        <div class="poem-title">Sterling Hypnosis</div>
+        <button class="poem-head" aria-expanded="false" aria-controls="poem-body-sterling">
+          <span class="poem-title">Sterling Hypnosis</span>
+          <span class="poem-chevron" aria-hidden="true">▾</span>
+        </button>
         <div class="poem-meta">spoken word performance</div>
-        <div class="coming-soon">
-          <div class="cs-dot"></div>
-          <div><div class="cs-text">Recording coming soon</div><div class="cs-sub">The words exist. The mic is warming up.</div></div>
+        <div class="poem-audio">
+          <audio controls preload="metadata">
+            <source src="Sterling%20Hypnosis.mp3" type="audio/mpeg">
+            Your browser doesn't support audio playback.
+          </audio>
+        </div>
+        <div class="poem-body" id="poem-body-sterling">
+          <div class="poem-divider"></div>
+          <div class="poem-text">There's a taste in the air that I can't seem to place
+The scent of it stings. It's tingling my face.
+The ocean is raging from people packed tightly,
+shoulder to shoulder. Now, give me the night.
+If Benson believes in me, I'll achieve an evening of action, pleasure and distraction.
+Acting out scenes that play in my dreams.
+I mix them with facts and spark a reaction.
+Blasting the senses with inputs and blends - amalgamations that help us ascend.
+Am I missing the mixture's essential components?
+Maybe I measured too much for the moment?
+Woah. The size of that serving has started a swirling.
+Commencing a whirlwind of swerving and twirling.
+My world is turning, upending, and whirling.
+Curtains encroach on my sterling hypnosis.
+Clash with the blackness; a struggle ensues.
+Glimpsing my doom as my soul is consumed.
+That veil - I know it conceals something sacred.
+I can't seem to make my way through while this wasted.
+My axes are aching. This pain is an awakening.
+Waiting for the cyclone to settle, it's better to just let it be and breath in deeply
+while seeking a reef I think I can reach.
+Stand on the sandbar in awe of the sea,
+stretched to encompass the concept of me.
+Feed upon oxygen, then stretch my feet.
+Flee from the box I'm in - set myself free.
+
+Fragments of failure float in my mind
+For the cave I crawled out of was my own design.
+I played through each phase and escaped the cascade,
+but the hole I climbed up from was one that I made.
+Accepting my actions, adjusting my attitudes,
+detecting distractions, and trusting in gratitude.
+Truly there are far more taxing escapades
+than exploring eternity &amp; returning unscathed.
+Introspective affection back under control
+I've emerged from the experience with a skip in my stroll.
+Observing exposes I'm somehow more whole.
+A sterling hypnosis to remold the soul.</div>
         </div>
       </div>
     </div>
@@ -450,7 +638,6 @@ footer span{color:var(--mint);}
 <!-- SOUNDS -->
 <section id="sounds">
   <div class="section-inner">
-    <div class="section-label">Voice Portfolio</div>
     <h2 class="section-title">Sounds</h2>
     <p class="section-lead">Magicians may never reveal their secrets, but that's exactly what I'm doing here.<br>If my voice makes you feel something, then my spells are working.</p>
     <div class="divider"></div>
@@ -458,62 +645,34 @@ footer span{color:var(--mint);}
       <div class="sound-card glass">
         <div class="sc-type">Original Music · Song</div>
         <div class="sc-title">Layers</div>
-        <div class="drop-zone" id="dz-0">
-          <input type="file" id="fi-0" accept="audio/*">
-          <div class="drop-icon">🎵</div>
-          <div class="drop-label">Drop audio file here</div>
-          <div class="drop-sub">or click to browse · mp3, wav, m4a</div>
-        </div>
         <div class="coming-soon" style="margin-top:.85rem;">
           <div class="cs-dot"></div>
           <div><div class="cs-text">Coming soon</div><div class="cs-sub">The spell is still being bottled.</div></div>
         </div>
-        <div class="audio-ready" id="ar-0"><div class="audio-filename" id="fn-0"></div><audio id="aud-0" controls></audio></div>
       </div>
       <div class="sound-card glass">
         <div class="sc-type">Original Music · Song</div>
         <div class="sc-title">Comets</div>
-        <div class="drop-zone" id="dz-1">
-          <input type="file" id="fi-1" accept="audio/*">
-          <div class="drop-icon">🎵</div>
-          <div class="drop-label">Drop audio file here</div>
-          <div class="drop-sub">or click to browse · mp3, wav, m4a</div>
-        </div>
         <div class="coming-soon" style="margin-top:.85rem;">
           <div class="cs-dot"></div>
           <div><div class="cs-text">Coming soon</div><div class="cs-sub">The spell is still being bottled.</div></div>
         </div>
-        <div class="audio-ready" id="ar-1"><div class="audio-filename" id="fn-1"></div><audio id="aud-1" controls></audio></div>
       </div>
       <div class="sound-card glass">
         <div class="sc-type">Original Music · Song</div>
         <div class="sc-title">Elements</div>
-        <div class="drop-zone" id="dz-2">
-          <input type="file" id="fi-2" accept="audio/*">
-          <div class="drop-icon">🎵</div>
-          <div class="drop-label">Drop audio file here</div>
-          <div class="drop-sub">or click to browse · mp3, wav, m4a</div>
-        </div>
         <div class="coming-soon" style="margin-top:.85rem;">
           <div class="cs-dot"></div>
           <div><div class="cs-text">Coming soon</div><div class="cs-sub">The spell is still being bottled.</div></div>
         </div>
-        <div class="audio-ready" id="ar-2"><div class="audio-filename" id="fn-2"></div><audio id="aud-2" controls></audio></div>
       </div>
       <div class="sound-card glass">
         <div class="sc-type">Original Music · Song</div>
         <div class="sc-title">Tethered</div>
-        <div class="drop-zone" id="dz-3">
-          <input type="file" id="fi-3" accept="audio/*">
-          <div class="drop-icon">🎵</div>
-          <div class="drop-label">Drop audio file here</div>
-          <div class="drop-sub">or click to browse · mp3, wav, m4a</div>
-        </div>
         <div class="coming-soon" style="margin-top:.85rem;">
           <div class="cs-dot"></div>
           <div><div class="cs-text">Coming soon</div><div class="cs-sub">The spell is still being bottled.</div></div>
         </div>
-        <div class="audio-ready" id="ar-3"><div class="audio-filename" id="fn-3"></div><audio id="aud-3" controls></audio></div>
       </div>
     </div>
   </div>
@@ -522,7 +681,6 @@ footer span{color:var(--mint);}
 <!-- VIDEOS -->
 <section id="videos">
   <div class="section-inner">
-    <div class="section-label">Performances</div>
     <h2 class="section-title">Videos</h2>
     <p class="section-lead">I'm told my eyebrows do most of the talking.</p>
     <div class="divider"></div>
@@ -579,23 +737,23 @@ footer span{color:var(--mint);}
     <div class="services-grid">
       <div class="service-card glass">
         <div class="svc-icon">🎵</div>
-        <div class="svc-name">Music &amp; Song</div>
-        <div class="svc-desc">Original songs, collaborations, vocal features — where rhythm meets meaning.</div>
+        <div class="svc-name">Music</div>
+        <div class="svc-desc">I sing. I rap. I make noise. Original songs, collaborations, vocal features. I'm very comfortable on stage and in the booth.</div>
       </div>
       <div class="service-card glass">
         <div class="svc-icon">✦</div>
         <div class="svc-name">Original Poetry</div>
-        <div class="svc-desc">Commissions for events, gifts, campaigns — anything that needs a few true words.</div>
+        <div class="svc-desc">Commissions for art, events, gifts, birthdays, campaigns — anything where you need help crafting your message.</div>
       </div>
       <div class="service-card glass">
         <div class="svc-icon">🎙</div>
         <div class="svc-name">Voice Acting</div>
-        <div class="svc-desc">Characters, narration, commercial reads — I find the truth in every voice.</div>
+        <div class="svc-desc">Characters, narration, commercials — I immerse myself into every project I'm involved in.</div>
       </div>
       <div class="service-card glass">
         <div class="svc-icon">📖</div>
         <div class="svc-name">Audio Books</div>
-        <div class="svc-desc">Long-form narration with stamina, clarity, and warmth across every chapter.</div>
+        <div class="svc-desc">Long-form narration with stamina, clarity, and dynamics to keep listeners engaged.</div>
       </div>
     </div>
 
@@ -701,32 +859,6 @@ function showMain(anchor){
   }
 }
 
-// ── SOUNDS DRAG & DROP ──
-[0,1,2,3].forEach(i=>{
-  const dz=document.getElementById('dz-'+i);
-  const input=document.getElementById('fi-'+i);
-  const ar=document.getElementById('ar-'+i);
-  const fn=document.getElementById('fn-'+i);
-  const aud=document.getElementById('aud-'+i);
-  const cs=dz.closest('.sound-card').querySelector('.coming-soon');
-
-  function loadFile(file){
-    if(!file||!file.type.startsWith('audio/')) return;
-    aud.src=URL.createObjectURL(file);
-    fn.textContent=file.name;
-    ar.style.display='block';
-    cs.style.display='none';
-    dz.style.borderColor='rgba(93,214,184,0.5)';
-    dz.querySelector('.drop-icon').textContent='✓';
-    dz.querySelector('.drop-label').textContent='File loaded';
-    dz.querySelector('.drop-sub').textContent='Drop a new file to replace';
-  }
-  input.addEventListener('change',e=>loadFile(e.target.files[0]));
-  dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag-over');});
-  dz.addEventListener('dragleave',()=>dz.classList.remove('drag-over'));
-  dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag-over');loadFile(e.dataTransfer.files[0]);});
-});
-
 // ── MAGICAL CANVAS BACKGROUND ──
 const canvas=document.getElementById('magic-canvas');
 const ctx=canvas.getContext('2d');
@@ -794,4 +926,40 @@ function spawnSymbol(){
   const rot=(Math.random()*60-30)+'deg';
   const el=document.createElement('div');
   el.className='sym';
-  el.style.cssText=`position:fixed;left:${x}%;top:${(8+Math.random()*82)}%;width:${size}px;height:${size}px;--sym-op:${opacity};--sym-rot:${rot};ani
+  el.style.cssText=`position:fixed;left:${x}%;top:${(8+Math.random()*82)}%;width:${size}px;height:${size}px;--sym-op:${opacity};--sym-rot:${rot};animation-duration:${duration}s;`;
+  el.innerHTML=symbols[name];
+  symLayer.appendChild(el);
+  setTimeout(()=>el.remove(),duration*1000);
+}
+for(let i=0;i<6;i++) setTimeout(spawnSymbol,i*800);
+setInterval(spawnSymbol,2400);
+
+// ── POEM CARD EXPAND / COLLAPSE ──
+document.querySelectorAll('.poem-card .poem-head').forEach(head=>{
+  head.addEventListener('click',()=>{
+    const card=head.closest('.poem-card');
+    const isOpen=card.getAttribute('data-open')==='true';
+    document.querySelectorAll('.poem-card').forEach(c=>{
+      c.setAttribute('data-open','false');
+      const h=c.querySelector('.poem-head');
+      if(h) h.setAttribute('aria-expanded','false');
+    });
+    if(!isOpen){
+      card.setAttribute('data-open','true');
+      head.setAttribute('aria-expanded','true');
+      setTimeout(()=>card.scrollIntoView({behavior:'smooth',block:'nearest'}),60);
+    }
+  });
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    document.querySelectorAll('.poem-card[data-open="true"]').forEach(c=>{
+      c.setAttribute('data-open','false');
+      const h=c.querySelector('.poem-head');
+      if(h) h.setAttribute('aria-expanded','false');
+    });
+  }
+});
+</script>
+</body>
+</html>
