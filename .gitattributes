@@ -1,2 +1,10 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Audio files — treat as binary to prevent line-ending corruption
+*.mp3 binary
+*.wav binary
+*.ogg binary
+*.m4a binary
+*.aac binary
+*.flac binary
