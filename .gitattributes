@@ -3,6 +3,10 @@
 
 # Audio files — treat as binary to prevent line-ending corruption
 *.mp3 binary
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.webp binary
 *.wav binary
 *.ogg binary
 *.m4a binary
