@@ -356,6 +356,49 @@ footer{text-align:center;padding:2.5rem 2rem;position:relative;z-index:10;border
 footer p{font-size:.75rem;color:rgba(163,140,230,.38);letter-spacing:.06em;}
 footer span{color:var(--mint);}
 
+/* ── FILE ATTACHMENT ── */
+.attach-wrap{display:flex;flex-direction:column;gap:.35rem;}
+.attach-label-text{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--lavender);opacity:.65;}
+.attach-drop{
+  border:1.5px dashed rgba(163,140,230,0.28);border-radius:10px;
+  padding:.85rem 1rem;display:flex;align-items:center;gap:.7rem;
+  cursor:pointer;transition:border-color .2s,background .2s;position:relative;
+}
+.attach-drop:hover{border-color:rgba(91,174,232,0.5);background:rgba(91,174,232,0.04);}
+.attach-drop input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.attach-icon{font-size:1.1rem;opacity:.45;flex-shrink:0;}
+.attach-hint span{display:block;font-size:.75rem;color:var(--lavender);opacity:.6;}
+.attach-hint small{font-size:.67rem;color:rgba(163,140,230,.35);font-style:italic;font-family:'Cormorant Garamond',serif;}
+.attach-name{font-size:.73rem;color:var(--mint);letter-spacing:.05em;display:none;margin-top:.25rem;}
+
+/* ── SOUND CARD EXPAND ── */
+.sound-head{
+  display:flex;align-items:center;justify-content:space-between;gap:.6rem;
+  width:100%;background:none;border:none;padding:0;margin:0 0 .3rem;
+  text-align:left;cursor:pointer;color:inherit;font:inherit;
+}
+.sound-head:focus-visible{outline:1px solid var(--sky);outline-offset:4px;border-radius:4px;}
+.sound-head:hover .sc-title{color:var(--mint);}
+.sc-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--cream);transition:color .2s;}
+.sc-chevron{font-size:.85rem;color:var(--lavender);opacity:.55;transition:transform .35s ease,opacity .2s;flex-shrink:0;}
+.sound-card[data-open="true"] .sc-chevron{transform:rotate(180deg);opacity:.9;}
+.sound-card[data-open="true"]{grid-column:1 / -1;border-color:rgba(91,174,232,0.3);}
+.sound-body{max-height:0;overflow:hidden;opacity:0;margin-top:0;transition:max-height .5s ease,opacity .3s ease,margin-top .3s ease;}
+.sound-card[data-open="true"] .sound-body{max-height:5000px;opacity:1;margin-top:1.4rem;}
+.sound-divider{height:1px;width:40px;background:linear-gradient(90deg,var(--violet),var(--sky));margin:0 auto 1.4rem;border-radius:2px;opacity:.55;}
+.sound-text{font-family:'Cormorant Garamond',serif;font-size:1.05rem;line-height:1.85;color:rgba(240,236,255,.82);max-width:620px;margin:0 auto;white-space:pre-wrap;}
+
+/* ── POEMS PAGE ── */
+#poems-page{min-height:100vh;padding-top:7rem;position:relative;z-index:10;}
+.poems-pg-inner{max-width:1080px;margin:0 auto;padding:0 2rem 6rem;}
+.view-all-btn{
+  display:inline-flex;align-items:center;gap:.45rem;margin-top:2rem;
+  font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--sky);background:none;border:none;cursor:pointer;
+  padding:0;transition:color .2s,gap .2s;font-family:'Nunito',sans-serif;
+}
+.view-all-btn:hover{color:var(--mint);gap:.7rem;}
+
 /* ── RESPONSIVE ── */
 @media(max-width:700px){
   nav{padding:1rem 1.3rem;}
@@ -668,6 +711,7 @@ A sterling hypnosis to remold the soul.</div>
         </div>
       </div>
     </div>
+    <button class="view-all-btn" onclick="showPoems()">All Poems &nbsp;›</button>
   </div>
 </section>
 
@@ -678,38 +722,274 @@ A sterling hypnosis to remold the soul.</div>
     <p class="section-lead">Magicians may never reveal their secrets, but that's exactly what I'm doing here.<br>If my voice makes you feel something, then my spells are working.</p>
     <div class="divider"></div>
     <div class="sounds-grid" id="sounds-grid">
-      <div class="sound-card glass">
+
+      <div class="sound-card glass" data-open="false">
         <div class="sc-type">Original Music · Song</div>
-        <div class="sc-title">Layers</div>
-        <div class="coming-soon" style="margin-top:.85rem;">
+        <button class="sound-head" aria-expanded="false" aria-controls="sound-body-layers">
+          <span class="sc-title">Layers</span>
+          <span class="sc-chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="coming-soon" style="margin-top:.6rem;">
           <div class="cs-dot"></div>
           <div><div class="cs-text">Coming soon</div><div class="cs-sub">The spell is still being bottled.</div></div>
         </div>
+        <div class="sound-body" id="sound-body-layers">
+          <div class="sound-divider"></div>
+          <div class="sound-text">Tear me from reality and place me on the page.
+Modulate mentality, embrace it and engage.
+Integrate all the great data that my brain ate.
+Share what I've ingested, we can all relate.
+
+A year of enrichment, escape, and endeavor.
+A tear for the tormented, tainted, and tethered.
+Don't fear detainment, detachment, or death.
+Appear for your peers. Peer into their depths.
+
+It's not about highlighting all of your failures,
+flaring your faults, or owning your ailments.
+They only pass through you, and you can decide who
+You are by choosing what brings you fulfillment.
+
+By forging a path that lets you forget it.
+The lives you'd have lived if life let you reset it.
+You thicken your plot, and pile on layers.
+And layers and layers and layers....
+
+Appeasement and pleasing have long lost their hold.
+The habits I've harbored and hated unfold.
+They saved me, they served me, but long past their due.
+Discarded and tarnished to make room for new.
+
+But first you must heal or old wounds will fester.
+They'll test you and threaten with gestures to best you.
+Invest in yourself and success is your treasure.
+Master momentum for mirth beyond measure.
+
+It's not about highlighting all of your failures,
+flaring your faults, or owning your ailments.
+They only pass through you, and you can decide who
+You are by choosing what brings you fulfillment.
+
+Start forging a path that lets you forget it:
+The lives you'd have lived if life let you reset it.
+Then thicken your plot, and pile on layers.
+And layers and layers and layers....</div>
+        </div>
       </div>
-      <div class="sound-card glass">
+
+      <div class="sound-card glass" data-open="false">
         <div class="sc-type">Original Music · Song</div>
-        <div class="sc-title">Comets</div>
-        <div class="coming-soon" style="margin-top:.85rem;">
+        <button class="sound-head" aria-expanded="false" aria-controls="sound-body-comets">
+          <span class="sc-title">Comets</span>
+          <span class="sc-chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="coming-soon" style="margin-top:.6rem;">
           <div class="cs-dot"></div>
           <div><div class="cs-text">Coming soon</div><div class="cs-sub">The spell is still being bottled.</div></div>
         </div>
+        <div class="sound-body" id="sound-body-comets">
+          <div class="sound-divider"></div>
+          <div class="sound-text">Enter my atmosphere just for a fraction.
+I'll pull you in closely to share satisfaction.
+Attracted to your actions, your aura, your essence.
+Adoring each session in your precious presence.
+
+By cosmic currents, our orbits have crossed.
+I'm changed from the impact our collisions have caused.
+If I'm lost in space, I don't wish to be found.
+I'll count the rotations til you come back around.
+
+My muse, a lover, and above all, a friend.
+Let us uncover mysteries we cannot comprehend.
+I'll soar through your sky as you soar through mine.
+We're just frozen space dust - comets entwined.
+
+While carving our paths, we blaze through our trails.
+Particulates gather as we pick up new tails.
+We leave behind relics the cosmos will covet.
+Stories in the stars suspend til they plummet.
+
+Bodies entangled by forces unseen.
+Celestial intersection, our courses careen.
+Gravity twists us around both our centers.
+Your love is a drug and I'm on a bender.
+
+My muse, a lover, and above all, a friend.
+Let us uncover mysteries we cannot comprehend.
+I'll soar through your sky as you soar through mine.
+We're just frozen space dust - comets entwined.
+
+The moment I asked you to enter my fable.
+You infused me with power you sent from your cable.
+A wireless connection; the network is stable.
+No strings, no stress, no need for a label.
+
+No pretense, just presence. Your soul is so free.
+It brings me such joy when you share it with me.
+I don't wish to own you, possess, or postpone you.
+You're the queen of your kingdom, and I'll never dethrone you.
+
+The fantastic realms that we enter together.
+We'll generate pleasure with every endeavor.
+Our story so far has been one filled with bliss.
+We've written ourselves a beautiful plot twist.
+
+My muse, a lover, and above all, a friend.
+Let us uncover mysteries we cannot comprehend.
+I'll soar through your sky as you soar through mine.
+We're just frozen space dust - comets entwined.</div>
+        </div>
       </div>
-      <div class="sound-card glass">
+
+      <div class="sound-card glass" data-open="false">
         <div class="sc-type">Original Music · Song</div>
-        <div class="sc-title">Elements</div>
-        <div class="coming-soon" style="margin-top:.85rem;">
+        <button class="sound-head" aria-expanded="false" aria-controls="sound-body-undermine">
+          <span class="sc-title">Undermine the Overtones</span>
+          <span class="sc-chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="coming-soon" style="margin-top:.6rem;">
           <div class="cs-dot"></div>
           <div><div class="cs-text">Coming soon</div><div class="cs-sub">The spell is still being bottled.</div></div>
         </div>
+        <div class="sound-body" id="sound-body-undermine">
+          <div class="sound-divider"></div>
+          <div class="sound-text">Approaching destination, customs is a breeze.
+Docked into my station, finally at ease.
+Quick, unload the cargo, organize supplies
+Build a brief abode beneath the starry skies.
+
+Anticipate, hesitate - either way: Syncopate
+Settle in a nation filled with Vibrations.
+Dance through the nettles, prickly sensations.
+Addicted to stickin' to bits and fixations.
+
+Bumblin' with beats beneath the big dipper.
+Every other neighbor a friendly day tripper.
+Levelin' with revelers and ravin' with the knaves.
+Meddlin' with settlers and wobblin' to waves.
+
+Undertake, overthrow.
+Undermine the overtones.
+Overflow with understanding,
+Feel the rhythm in your bones.
+
+Inner peace outer poise
+Sing it louder, use your voice.
+In the thick of out of wack
+Send your signal through the noise.
+
+The forlorn horns…. gasping, growling.
+The buttery bronze… honking &amp; howling.
+The braying, the blaring, they lock you in a trance,
+Frozen by a frisson of orchestral Expanse.
+
+He created a stage: an open-faced rave cage.
+Lock yourself in and the party begins.
+With brass from the past, the best begins blasting.
+Sippin' upon space dust, I start casting.
+
+Dishin' out cantrips. Flippin' the axis.
+A separated headtrip split into fractions.
+Reshape the wavelengths, rippled Reflections.
+Cosmic campout cracklin' with Connections.
+
+Undertake, overthrow.
+Undermine the overtones.
+Overflow with understanding,
+Feel the rhythm in your bones.
+
+Inner peace, outer poise.
+Sing it loud, use your voice.
+In the thick of out of wack
+Send your signal through the noise.
+
+Undermine the overtones.
+Feel the rhythm in your bones.
+Inner peace, outer poise
+Send your signal through the noise.</div>
+        </div>
       </div>
-      <div class="sound-card glass">
+
+      <div class="sound-card glass" data-open="false">
         <div class="sc-type">Original Music · Song</div>
-        <div class="sc-title">Tethered</div>
-        <div class="coming-soon" style="margin-top:.85rem;">
+        <button class="sound-head" aria-expanded="false" aria-controls="sound-body-tethered">
+          <span class="sc-title">Tethered</span>
+          <span class="sc-chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="coming-soon" style="margin-top:.6rem;">
           <div class="cs-dot"></div>
           <div><div class="cs-text">Coming soon</div><div class="cs-sub">The spell is still being bottled.</div></div>
         </div>
+        <div class="sound-body" id="sound-body-tethered">
+          <div class="sound-divider"></div>
+          <div class="sound-text">You pulled me from the trenches.
+You helped rebuild my stage.
+You lifted me with love
+Showed me there's still someone to save.
+
+Cus I believed I'd lost it -
+The blaze once in my eyes.
+Torn about &amp; tossed it out
+To silence my own cries.
+
+You tore me from the talons
+Of a beast I chose to ride.
+Ripped my reins from the creature's clutches,
+and placed them by my side.
+
+They say that life is tethered in mystery.
+My soul is tethered to you.
+I'll be your alibi through this web of lies.
+And together we can find the truth.
+
+In the evidence of our history
+I think I've found a clue
+The puzzle's prize, we might not find,
+But I'll search for the pieces with you!
+
+And then you called me from the trenches,
+So I could raise you to the stage.
+I lifted you with love
+Showed you there's still something to save.
+
+Cuz you believed you'd lose it
+Love's bell began to toll.
+All you needed was one to confide in -
+to peer into your soul.
+
+I pulled you from that prison
+A cell your mind had made to be
+I delved unto the demon's depths
+and drew the jailer's key.
+
+They say that life is tethered in mystery.
+My soul is tethered to you.
+I'll be your alibi through this web of lies.
+And together we can find the truth.
+
+In the evidence of our history
+I think I've found a clue
+The puzzle's prize, we might not find,
+But I'll search for the pieces with you!
+
+Discarded cargo - leave it in the dust.
+A rolling stone tends to gather what it must.
+Serves you fine to sever ties, separate from your old lives.
+Tethered in trajectory to help the world find levity!
+
+They say that life is tethered in mystery.
+My soul is tethered to you.
+I'll be your alibi through this web of lies.
+And together we can find the truth.
+
+In the evidence of our history
+I think I've found a clue
+The puzzle's prize, we might not find,
+But I'll search for the pieces....
+I'll search for the pieces with you!</div>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -818,6 +1098,19 @@ A sterling hypnosis to remold the soul.</div>
           <option>Something Else</option>
         </select>
         <textarea name="message" placeholder="Tell me about your project — the weirder the better."></textarea>
+        <div class="attach-wrap">
+          <span class="attach-label-text">Attach a file (optional)</span>
+          <label class="attach-drop" id="attach-drop">
+            <input type="file" name="attachment" id="attach-input"
+              accept="audio/*,video/*,image/*,.mp3,.mp4,.wav,.m4a,.aac,.ogg,.flac,.jpg,.jpeg,.png,.gif,.webp,.mov,.avi,.mkv">
+            <span class="attach-icon">📎</span>
+            <div class="attach-hint">
+              <span>Drop a file or click to browse</span>
+              <small>MP3, MP4, WAV, JPG, PNG, MOV and more</small>
+            </div>
+          </label>
+          <div class="attach-name" id="attach-name"></div>
+        </div>
         <button type="submit" class="cf-submit">Send It ✦</button>
       </div>
     </div>
@@ -830,6 +1123,333 @@ A sterling hypnosis to remold the soul.</div>
 </footer>
 
 </div><!-- /main-page -->
+
+<!-- ═══════════ POEMS PAGE ═══════════ -->
+<div id="poems-page" class="page">
+  <div class="poems-pg-inner">
+    <button class="back-link" onclick="showMain('words')">← Words</button>
+    <h2 class="section-title">More Poems</h2>
+    <div class="divider"></div>
+    <div class="poems-grid">
+
+      <div class="poem-card glass" data-open="false">
+        <div class="poem-type">Original Poem</div>
+        <button class="poem-head" aria-expanded="false" aria-controls="poem-body-forgive">
+          <span class="poem-title">Forgive</span>
+          <span class="poem-chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="poem-body" id="poem-body-forgive">
+          <div class="poem-divider"></div>
+          <div class="poem-text">Battered by promises broken and fractured
+Captured completeness awoke to disaster.
+Beaten by weeks of wrath that seek to
+perturb your peace and awaken your weakness.
+
+Wronged and spurned, the anger emerges.
+Slighted and scorned, the bitterness surges.
+It's trivial living in rivers of rage.
+Your tended resentment creating a cage.
+
+Little by little, your shell becomes brittle.
+Your casing is cracked, exposing the core.
+More and more your mind's in the middle.
+Of letting it fizzle or leaning in more.
+
+Gleaning the reason interprets their treason.
+Make it make sense from their side, and believe them.
+Pardon their partisan approach to devotion.
+Harboring hatred inhibits your motion.
+
+Imagine the freedom of knowing no need
+to think of the moment you started to bleed.
+Their blade was betrayal, your flesh the future.
+Left you to scar as you scratch at your sutures.
+
+Abusive, the beast, we allow to intrude
+And truthfully all that it's hurting is you.
+So settle this debt, release it and live.
+Don't try to forget - choose peace and forgive</div>
+        </div>
+      </div>
+
+      <div class="poem-card glass" data-open="false">
+        <div class="poem-type">Original Poem</div>
+        <button class="poem-head" aria-expanded="false" aria-controls="poem-body-kuddle">
+          <span class="poem-title">Kuddle Puddle</span>
+          <span class="poem-chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="poem-body" id="poem-body-kuddle">
+          <div class="poem-divider"></div>
+          <div class="poem-text">Melting into a motionless ocean.
+Losing the soul to doses so potent.
+Both of our borders dissolve and disorder.
+Blended components distorting the moment.
+
+Uncover the quotient to solve for the soul.
+Boundaries broken and halves become whole.
+This affect induced has us holding on loose,
+like grains on a shore as we roll through the door.
+
+The waves repeating, the tide in sequence
+Edges bleeding, we slip through the seams.
+Losing your grip to pull free the secret.
+Reaching in deeply, delving in dreams.
+
+Paired and composed of powerful pieces.
+Sharing the breath that passes between us.
+Tension decreasing facilitates a thrill.
+Pressure released. In stillness we spill.</div>
+        </div>
+      </div>
+
+      <div class="poem-card glass" data-open="false">
+        <div class="poem-type">Original Poem</div>
+        <button class="poem-head" aria-expanded="false" aria-controls="poem-body-ice">
+          <span class="poem-title">Fuck I.C.E.</span>
+          <span class="poem-chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="poem-body" id="poem-body-ice">
+          <div class="poem-divider"></div>
+          <div class="poem-text">A heart filled with fear is too insufficient
+to succeed in stopping both you and our mission.
+Insist upon living an unbiased existence,
+and be ripped from the world amid peaceful resistance.
+
+Our forces refuse to lose their momentum
+Despite the abuse and the ways we're tormented.
+Spiteful, hateful, inhuman intentions....
+Inventing excuses to consume our attention.
+
+"Look here, at the truth, ignore what you see."
+Our roots, they wish to rip from our tree,
+but our legs will not buckle, our eyes will not close.
+Our fingers can fight with poems and prose.
+
+Upon weighted shoulders, we carry those souls.
+The fallen will bolster us to resist their control.
+This sickening status the system promotes
+is midden and madness they force down our throats.
+
+Regurgitation is sweeping the nation.
+The taste of their treason defying all reason.
+It serves their agenda to send us to detention
+or simply to end us while earning their pension.
+
+Collecting arrests with detestable methods
+We depend on our efforts to make sense of the death.
+Sisters &amp; brothers, let us rise with each other.
+Together, we'll untwist from this treatment we suffer.</div>
+        </div>
+      </div>
+
+      <div class="poem-card glass" data-open="false">
+        <div class="poem-type">Original Poem</div>
+        <button class="poem-head" aria-expanded="false" aria-controls="poem-body-petalstorm">
+          <span class="poem-title">Petalstorm</span>
+          <span class="poem-chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="poem-body" id="poem-body-petalstorm">
+          <div class="poem-divider"></div>
+          <div class="poem-text">I flow through a field of so many choices,
+seeking a plumage that has its own voice.
+Bloomed and beautiful, with bristles that sting.
+If I pick the right blossom, I'll hear her heart sing.
+
+Peel back the petals protecting your organs.
+I seek your origin. I won't calm your storm.
+I welcome it's rumble and worship your form.
+
+While your waters rush over me, I thirst for your thunder.
+I'll be sated once you're shaking, and your tide pulls me under.
+Your tempest is trembling. Your ember is ephemeral.
+Your elements awaken when exposed to my chemicals.
+
+Your electricity... the way it entices me.
+I can't control your current; I crave the way it fights me.
+The force of your spirit... the way that it strikes me.
+I feared you might never hit the same place twice.
+
+But again, with luck, it appears I've been struck.
+Your bolts take hold, and your spout starts to suck.
+I'll trigger your intensity when you toss me in your tempest.
+Woo me with your whirlwind, and I'll accept my sentence.
+
+Squeezed between your borders, exploring your aisles.
+Routing through your corridors, I'm lost for quite a while.
+Maneuvering with mastery to make your storm stronger.
+I think I'll stay down here for quite a bit longer.</div>
+        </div>
+      </div>
+
+      <div class="poem-card glass" data-open="false">
+        <div class="poem-type">Original Poem</div>
+        <button class="poem-head" aria-expanded="false" aria-controls="poem-body-malleable">
+          <span class="poem-title">Malleable Memory</span>
+          <span class="poem-chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="poem-body" id="poem-body-malleable">
+          <div class="poem-divider"></div>
+          <div class="poem-text">Memory, memory, where have you gone?
+I cannot remember the words to this song.
+The lyrics escape me, the rhythm feels wrong.
+Disturbing the verses by humming along.
+
+Abandoned by archives arranged in my brain.
+Those books were checked out and flushed down some drain.
+The rhetoric ranges from rapture to rage.
+The narrative is shaky, I mixed up the pages.
+
+I swear it just sat on the tip of my tongue.
+Now I've lost the path of the story I strung.
+The sequence is scrambled, and though I risk rambling,
+I'll push for performance - a dangerous gamble.
+
+Forcing my cortex to store in its treasury,
+then coerced into confidence by cerebellar treachery.
+A hoard of temporal storage aborted its directory,
+when my hippocampus' heresy misplaced a precious memory.
+
+I know it was something insightful.... it truly felt right while it lived in my mind
+but given a limited tidbit of time, it slipped outside with no lips to guide it.
+I survey my surroundings for something profound I dropped upon the ground.
+With no hint of its existence, I come to my senses, admit that it's lost and will not be found.
+
+What was I talking about? Who cares, anyway?
+I was lost in the rhythm our frequencies made.
+The tangent I rode took me far from that matter.
+I was poised to propose a point, and then my focus scattered.
+
+I couldn't quite communicate that last thought I had.
+Try not to feel bad. It happens, it's natural.
+The trappings occasionally release what they've captured
+from so long ago when it serves you no more.
+
+It's mischievous, our on-board storage,
+sworn to contain each tale it's told.
+Trying to hold it straight is vain...
+too many fragments we fail to control.
+
+Nostalgia is sweet - the taste, and the feeling.
+It often repeats, but it's real, and it's healing.
+So, we tend to reminisce, relive, and
+revel, in all the moments we miss.
+
+Memory is malleable, far from infallible, recalling it clearly with discreet variations.
+Fear not the details and carry through failure with improvisation.
+
+They just want to feel what you felt,
+so believe it yourself, and really sell it.
+Make their minds melt, and if nothing else,
+they'll remember that you were the one to tell it.</div>
+        </div>
+      </div>
+
+      <div class="poem-card glass" data-open="false">
+        <div class="poem-type">Original Poem</div>
+        <button class="poem-head" aria-expanded="false" aria-controls="poem-body-collector">
+          <span class="poem-title">The Collector</span>
+          <span class="poem-chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="poem-body" id="poem-body-collector">
+          <div class="poem-divider"></div>
+          <div class="poem-text">Woman, I'm guilty, wicked and filthy
+Sick with the curve of your hips on my mind.
+Grinding around, I find that I'm bound
+Arousal unwinding as lips intertwine.
+
+Wondering how I'll ever sleep tonight.
+All I wanna do is relieve the tightness.
+Slightly loosened, ripened fruits.
+Slap on the caboose, and it's drippin' juices.
+
+Drink the nectar, consume the brew.
+Call me The Collector of things to do.
+The last was you, and I'm far from through
+So put us in a sector where we can screw.
+
+Doing it, doing it, doing it well.
+Severely misbehaving, I'll see you in hell.
+But a few times first, baby, here on earth.
+Quite clearly I'm craving, so gimme the dirt.
+
+Shake and rock ya from the sacral chakra
+Take you to the candy shop and then pop ya.
+Spot the scene, and simmer the action.
+Chemistry is cooking, let's spark a reaction.
+
+Doing it, doing, it doing it, til you turn
+blue and you're left with a little bit of burn.
+I can turn on a dime, and I earn what's mine.
+Now come... hit me with it one more time</div>
+        </div>
+      </div>
+
+      <div class="poem-card glass" data-open="false">
+        <div class="poem-type">Original Poem</div>
+        <button class="poem-head" aria-expanded="false" aria-controls="poem-body-okeechobee">
+          <span class="poem-title">Okeechobee</span>
+          <span class="poem-chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="poem-body" id="poem-body-okeechobee">
+          <div class="poem-divider"></div>
+          <div class="poem-text">The dawn of a day where we all come to play.
+A place where there's no need to race or make haste.
+Leaving no trace despite all the waste
+we produce in our chase to sample each taste.
+
+On arrival, constructing a base to survive in.
+Providing a fort for your family to thrive in.
+Consort and connive set the pump to overdrive
+Jump up and down on the ramp, take a dive.
+
+Falling further upward, climbing higher, gaining lift.
+Sailing through clouds, moving skyward towards a rift.
+Find your inner peace and recognize your gift.
+Artistic catharsis and your psyche shifts.
+
+Sifting throught gifts and trinkets acquired
+From strangers &amp; neighbors that share our desires
+Riding wild winds with sidekicks and friends.
+We travel the distance and dance til the end.
+
+Finding your friends in the crowd unexpectedly
+Time to get down, we descend, so impressed
+by aesthestics &amp; sounds, an authentic production.
+We manage to catch every act, no obstructions.
+
+At the end of your rope you must hold on to hope.
+All these beings &amp; folks &amp; their feelings evoking me.
+Finding more sources to flow out more dopamine.
+Bolster your forces, approach and stay close to me.
+
+Love who you are and hold onto freedom.
+Keep on reminding your comrades you need them.
+Know its okay if you briefly choke
+on the dust and the smoke or while jeering at jokes.
+
+Laugh at ourselves to keep the soul toasty.
+Poke or roast me cuz that's how it's supposed to be.
+Trust and devotion invoked by your homies
+We keep our hearts open at Okeechobee.</div>
+        </div>
+      </div>
+
+      <div class="poem-card glass" data-open="false">
+        <div class="poem-type">Original Poem · Coming Soon</div>
+        <button class="poem-head" aria-expanded="false" aria-controls="poem-body-rhyming">
+          <span class="poem-title">Rhyming Spree</span>
+          <span class="poem-chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="coming-soon" style="margin-top:.85rem;">
+          <div class="cs-dot"></div>
+          <div><div class="cs-text">Coming soon</div><div class="cs-sub">The spell is still being bottled.</div></div>
+        </div>
+        <div class="poem-body" id="poem-body-rhyming"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 <!-- ═══════════ CONTACT PAGE ═══════════ -->
 <div id="contact-page" class="page">
@@ -870,23 +1490,55 @@ A sterling hypnosis to remold the soul.</div>
 <!-- ═══════════ SCRIPTS ═══════════ -->
 <script>
 // ── PAGE NAVIGATION ──
-function showContact(){
-  document.getElementById('main-page').classList.remove('active');
-  document.getElementById('contact-page').classList.add('active');
+const PAGES=['main-page','contact-page','poems-page'];
+function showPage(id){
+  PAGES.forEach(p=>document.getElementById(p).classList.remove('active'));
+  document.getElementById(id).classList.add('active');
   window.scrollTo(0,0);
 }
+function showContact(){ showPage('contact-page'); }
+function showPoems(){ showPage('poems-page'); }
 function showMain(anchor){
-  document.getElementById('contact-page').classList.remove('active');
-  document.getElementById('main-page').classList.add('active');
+  showPage('main-page');
   if(anchor){
     setTimeout(()=>{
       const el=document.getElementById(anchor);
       if(el) el.scrollIntoView({behavior:'smooth'});
     },50);
-  } else {
-    window.scrollTo(0,0);
   }
 }
+
+// ── FILE ATTACHMENT LABEL ──
+const attachInput=document.getElementById('attach-input');
+const attachName=document.getElementById('attach-name');
+if(attachInput){
+  attachInput.addEventListener('change',()=>{
+    if(attachInput.files.length){
+      attachName.textContent='📎 '+attachInput.files[0].name;
+      attachName.style.display='block';
+    } else {
+      attachName.style.display='none';
+    }
+  });
+}
+
+// ── SOUND CARD EXPAND / COLLAPSE ──
+document.querySelectorAll('.sound-card .sound-head').forEach(head=>{
+  head.addEventListener('click',()=>{
+    const card=head.closest('.sound-card');
+    const isOpen=card.getAttribute('data-open')==='true';
+    document.querySelectorAll('.sound-card').forEach(c=>{
+      c.setAttribute('data-open','false');
+      const h=c.querySelector('.sound-head');
+      if(h) h.setAttribute('aria-expanded','false');
+    });
+    if(!isOpen){
+      card.setAttribute('data-open','true');
+      head.setAttribute('aria-expanded','true');
+      setTimeout(()=>card.scrollIntoView({behavior:'smooth',block:'nearest'}),60);
+    }
+  });
+});
 
 // ── MAGICAL CANVAS BACKGROUND ──
 const canvas=document.getElementById('magic-canvas');
