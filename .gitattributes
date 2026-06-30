@@ -3,6 +3,10 @@
 
 # Audio files — treat as binary to prevent line-ending corruption
 *.mp3 binary
+*.mp4 binary
+*.mov binary
+*.avi binary
+*.mkv binary
 *.jpg binary
 *.jpeg binary
 *.png binary
