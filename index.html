@@ -89,13 +89,14 @@ nav{
   border:1px solid rgba(163,140,230,0.18);border-radius:10px;
   padding:.5rem 0;min-width:140px;
   opacity:0;pointer-events:none;
-  transition:opacity .18s,transform .18s;
+  transition:opacity .18s 1s,transform .18s 1s,pointer-events 0s 1s;
   transform:translateX(-50%) translateY(-6px);
   z-index:300;
 }
 .nav-dropdown:hover .nav-dropdown-menu{
   opacity:1;pointer-events:auto;
   transform:translateX(-50%) translateY(0);
+  transition:opacity .18s 0s,transform .18s 0s;
 }
 .nav-dropdown-menu a{
   display:block;padding:.55rem 1.2rem;
@@ -480,7 +481,7 @@ footer span{color:var(--mint);}
     <span>Distilling the essence of all that moves me.</span>
   </div>
   <div class="hero-cta">
-    <button class="btn-primary" onclick="showSounds()">Hear My Voice</button>
+    <button class="btn-primary" onclick="showMain('words')">Hear My Voice</button>
     <button class="btn-ghost" onclick="showMain('hire')">Work With Me</button>
   </div>
 </section>
