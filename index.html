@@ -60,11 +60,11 @@ nav{
   cursor:pointer;
 }
 .nav-links{display:flex;gap:1.8rem;align-items:center;}
-.nav-links a{
+.nav-links>a{
   font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;
   color:var(--skylt);text-decoration:none;opacity:.75;transition:opacity .2s,color .2s;cursor:pointer;
 }
-.nav-links a:hover{opacity:1;color:var(--mint);}
+.nav-links>a:hover{opacity:1;color:var(--mint);}
 .nav-contact-btn{
   padding:.45rem 1.1rem;border-radius:30px;
   border:1px solid rgba(91,174,232,0.35);color:var(--skylt);
@@ -72,6 +72,39 @@ nav{
   text-decoration:none;transition:all .2s;cursor:pointer;
 }
 .nav-contact-btn:hover{border-color:var(--mint);color:var(--mint);opacity:1;}
+
+/* ── NAV DROPDOWN ── */
+.nav-dropdown{position:relative;display:inline-flex;align-items:center;}
+.nav-dropdown>a{
+  font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--skylt);text-decoration:none;opacity:.75;transition:opacity .2s,color .2s;cursor:pointer;
+  display:flex;align-items:center;gap:.28rem;
+}
+.nav-dropdown:hover>a{opacity:1;color:var(--mint);}
+.nav-dropdown-chevron{font-size:.6rem;opacity:.7;transition:transform .2s;}
+.nav-dropdown:hover .nav-dropdown-chevron{transform:rotate(180deg);}
+.nav-dropdown-menu{
+  position:absolute;top:calc(100% + .8rem);left:50%;
+  background:rgba(13,10,26,0.96);backdrop-filter:blur(16px);
+  border:1px solid rgba(163,140,230,0.18);border-radius:10px;
+  padding:.5rem 0;min-width:140px;
+  opacity:0;pointer-events:none;
+  transition:opacity .18s,transform .18s;
+  transform:translateX(-50%) translateY(-6px);
+  z-index:300;
+}
+.nav-dropdown:hover .nav-dropdown-menu{
+  opacity:1;pointer-events:auto;
+  transform:translateX(-50%) translateY(0);
+}
+.nav-dropdown-menu a{
+  display:block;padding:.55rem 1.2rem;
+  font-size:.73rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--skylt);text-decoration:none;opacity:.75;
+  transition:opacity .15s,color .15s,background .15s;
+  white-space:nowrap;cursor:pointer;
+}
+.nav-dropdown-menu a:hover{opacity:1;color:var(--mint);background:rgba(91,174,232,0.07);}
 
 /* ── PAGES ── */
 .page{display:none;}
@@ -83,6 +116,13 @@ nav{
   justify-content:center;align-items:center;
   text-align:center;padding:8rem 2rem 5rem;
   position:relative;z-index:10;
+}
+.hero-sigil{
+  width:clamp(90px,12vw,140px);
+  margin-bottom:1.5rem;
+  animation:fadeUp .9s .0s ease both;
+  filter:drop-shadow(0 0 18px rgba(107,63,160,0.55));
+  border-radius:50%;
 }
 .hero-name{
   font-family:'Cinzel Decorative',serif;
@@ -125,7 +165,7 @@ nav{
   padding:.85rem 2.2rem;border-radius:40px;border:1px solid rgba(163,140,230,0.35);
   color:var(--lavender);font-family:'Nunito',sans-serif;font-size:.85rem;
   letter-spacing:.1em;text-transform:uppercase;text-decoration:none;cursor:pointer;
-  transition:all .2s;background:transparent;border:1px solid rgba(163,140,230,0.35);
+  transition:all .2s;background:transparent;
 }
 .btn-ghost:hover{border-color:var(--mint);color:var(--mint);}
 @keyframes fadeUp{from{opacity:0;transform:translateY(26px);}to{opacity:1;transform:translateY(0);}}
@@ -233,22 +273,6 @@ section{padding:6rem 2rem;position:relative;z-index:10;}
 .play-btn:hover{gap:.85rem;color:var(--mint);}
 .play-circle{width:30px;height:30px;border-radius:50%;border:1px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:.65rem;flex-shrink:0;}
 
-/* ── VIDEO ── */
-.video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.3rem;}
-.video-thumb{
-  aspect-ratio:16/9;border-radius:12px;
-  border:1px solid rgba(163,140,230,0.15);
-  display:flex;align-items:center;justify-content:center;
-  position:relative;overflow:hidden;cursor:pointer;
-  transition:border-color .2s;
-  background:linear-gradient(135deg,rgba(61,34,112,0.6),rgba(13,10,26,0.8));
-}
-.video-thumb:hover{border-color:rgba(91,174,232,0.4);}
-.video-thumb::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(107,63,160,0.3),transparent 70%);}
-.v-play{width:52px;height:52px;border-radius:50%;background:rgba(240,236,255,0.1);border:1.5px solid rgba(240,236,255,0.45);display:flex;align-items:center;justify-content:center;font-size:1.1rem;z-index:1;transition:all .2s;}
-.video-thumb:hover .v-play{background:rgba(91,174,232,0.18);border-color:var(--sky);transform:scale(1.08);}
-.v-label{position:absolute;bottom:0;left:0;right:0;padding:.7rem 1rem;background:linear-gradient(0deg,rgba(13,10,26,.9),transparent);font-size:.82rem;color:var(--cream);z-index:1;}
-
 /* ── HIRE ── */
 .hire-intro{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--skylt);line-height:1.8;margin-bottom:2.5rem;max-width:620px;}
 .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1.1rem;margin-bottom:3rem;}
@@ -308,30 +332,24 @@ section{padding:6rem 2rem;position:relative;z-index:10;}
 .back-link{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--lavender);text-decoration:none;margin-bottom:2rem;transition:color .2s;cursor:pointer;background:none;border:none;padding:0;}
 .back-link:hover{color:var(--mint);}
 
-/* ── SOUND UPLOAD CARDS ── */
+/* ── SOUND CARD EXPAND ── */
 .sound-card{padding:1.5rem;}
 .sc-type{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mint);margin-bottom:.5rem;}
-.sc-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--cream);margin-bottom:.9rem;}
-.drop-zone{
-  border:1.5px dashed rgba(163,140,230,0.3);
-  border-radius:10px;padding:1.2rem 1rem;
-  text-align:center;cursor:pointer;
-  transition:border-color .2s,background .2s;
-  position:relative;
+.sound-head{
+  display:flex;align-items:center;justify-content:space-between;gap:.6rem;
+  width:100%;background:none;border:none;padding:0;margin:0 0 .3rem;
+  text-align:left;cursor:pointer;color:inherit;font:inherit;
 }
-.drop-zone:hover,.drop-zone.drag-over{
-  border-color:rgba(91,174,232,0.6);
-  background:rgba(91,174,232,0.05);
-}
-.drop-zone input[type=file]{
-  position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;
-}
-.drop-icon{font-size:1.3rem;opacity:.4;margin-bottom:.4rem;}
-.drop-label{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--lavender);opacity:.6;}
-.drop-sub{font-size:.68rem;color:rgba(163,140,230,.35);margin-top:.25rem;font-style:italic;font-family:'Cormorant Garamond',serif;}
-.audio-ready{display:none;margin-top:.6rem;}
-.audio-ready audio{width:100%;height:32px;accent-color:var(--mint);}
-.audio-filename{font-size:.72rem;color:var(--mint);margin-bottom:.4rem;letter-spacing:.05em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.sound-head:focus-visible{outline:1px solid var(--sky);outline-offset:4px;border-radius:4px;}
+.sound-head:hover .sc-title{color:var(--mint);}
+.sc-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--cream);transition:color .2s;}
+.sc-chevron{font-size:.85rem;color:var(--lavender);opacity:.55;transition:transform .35s ease,opacity .2s;flex-shrink:0;}
+.sound-card[data-open="true"] .sc-chevron{transform:rotate(180deg);opacity:.9;}
+.sound-card[data-open="true"]{grid-column:1 / -1;border-color:rgba(91,174,232,0.3);}
+.sound-body{max-height:0;overflow:hidden;opacity:0;margin-top:0;transition:max-height .5s ease,opacity .3s ease,margin-top .3s ease;}
+.sound-card[data-open="true"] .sound-body{max-height:5000px;opacity:1;margin-top:1.4rem;}
+.sound-divider{height:1px;width:40px;background:linear-gradient(90deg,var(--violet),var(--sky));margin:0 auto 1.4rem;border-radius:2px;opacity:.55;}
+.sound-text{font-family:'Cormorant Garamond',serif;font-size:1.05rem;line-height:1.85;color:rgba(240,236,255,.82);max-width:620px;margin:0 auto;white-space:pre-wrap;}
 
 /* ── COMING SOON ── */
 .coming-soon{
@@ -349,6 +367,32 @@ section{padding:6rem 2rem;position:relative;z-index:10;}
 @keyframes csPulse{0%,100%{opacity:.3;transform:scale(1);}50%{opacity:.9;transform:scale(1.25);}}
 .cs-text{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--lavender);opacity:.8;}
 .cs-sub{font-size:.72rem;color:rgba(163,140,230,.45);margin-top:.25rem;font-style:italic;font-family:'Cormorant Garamond',serif;}
+
+/* ── COMING SOON LARGE ── */
+.coming-soon-large{text-align:center;padding:3rem 2rem 2rem;}
+.cs-big-dot{
+  width:14px;height:14px;border-radius:50%;
+  background:var(--mint);opacity:.65;
+  margin:0 auto 1.5rem;
+  animation:csPulse 2.2s ease-in-out infinite;
+}
+.cs-big-text{
+  font-family:'Cinzel Decorative',serif;
+  font-size:1.15rem;letter-spacing:.14em;color:var(--lavender);margin-bottom:.7rem;
+}
+.cs-big-sub{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:1rem;color:rgba(163,140,230,.5);
+}
+
+/* ── SUBPAGES ── */
+#sounds-page,#videos-page,#events-page{min-height:100vh;padding-top:7rem;position:relative;z-index:10;}
+.subpage-inner{max-width:1080px;margin:0 auto;padding:0 2rem 6rem;}
+.events-poster{
+  max-width:440px;margin:0 auto;display:block;
+  border-radius:14px;border:1px solid rgba(163,140,230,0.2);
+  box-shadow:0 8px 48px rgba(107,63,160,0.35);
+}
 
 /* ── FOOTER ── */
 footer{text-align:center;padding:2.5rem 2rem;position:relative;z-index:10;border-top:1px solid rgba(163,140,230,0.1);}
@@ -371,29 +415,12 @@ footer span{color:var(--mint);}
 .attach-hint small{font-size:.67rem;color:rgba(163,140,230,.35);font-style:italic;font-family:'Cormorant Garamond',serif;}
 .attach-name{font-size:.73rem;color:var(--mint);letter-spacing:.05em;display:none;margin-top:.25rem;}
 
-/* ── SOUND CARD EXPAND ── */
-.sound-head{
-  display:flex;align-items:center;justify-content:space-between;gap:.6rem;
-  width:100%;background:none;border:none;padding:0;margin:0 0 .3rem;
-  text-align:left;cursor:pointer;color:inherit;font:inherit;
-}
-.sound-head:focus-visible{outline:1px solid var(--sky);outline-offset:4px;border-radius:4px;}
-.sound-head:hover .sc-title{color:var(--mint);}
-.sc-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--cream);transition:color .2s;}
-.sc-chevron{font-size:.85rem;color:var(--lavender);opacity:.55;transition:transform .35s ease,opacity .2s;flex-shrink:0;}
-.sound-card[data-open="true"] .sc-chevron{transform:rotate(180deg);opacity:.9;}
-.sound-card[data-open="true"]{grid-column:1 / -1;border-color:rgba(91,174,232,0.3);}
-.sound-body{max-height:0;overflow:hidden;opacity:0;margin-top:0;transition:max-height .5s ease,opacity .3s ease,margin-top .3s ease;}
-.sound-card[data-open="true"] .sound-body{max-height:5000px;opacity:1;margin-top:1.4rem;}
-.sound-divider{height:1px;width:40px;background:linear-gradient(90deg,var(--violet),var(--sky));margin:0 auto 1.4rem;border-radius:2px;opacity:.55;}
-.sound-text{font-family:'Cormorant Garamond',serif;font-size:1.05rem;line-height:1.85;color:rgba(240,236,255,.82);max-width:620px;margin:0 auto;white-space:pre-wrap;}
-
 /* ── POEMS PAGE ── */
 #poems-page{min-height:100vh;padding-top:7rem;position:relative;z-index:10;}
 .poems-pg-inner{max-width:1080px;margin:0 auto;padding:0 2rem 6rem;}
 .view-all-btn{
   display:inline-flex;align-items:center;gap:.45rem;margin-top:2rem;
-  font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;
+  font-size:1.05rem;letter-spacing:.12em;text-transform:uppercase;
   color:var(--sky);background:none;border:none;cursor:pointer;
   padding:0;transition:color .2s,gap .2s;font-family:'Nunito',sans-serif;
 }
@@ -403,7 +430,8 @@ footer span{color:var(--mint);}
 @media(max-width:700px){
   nav{padding:1rem 1.3rem;}
   .nav-links{gap:1rem;}
-  .nav-links a{font-size:.68rem;}
+  .nav-links>a{font-size:.68rem;}
+  .nav-dropdown>a{font-size:.68rem;}
   .about-grid{grid-template-columns:1fr;}
   .about-portrait{max-width:200px;aspect-ratio:1/1;}
   .form-row{grid-template-columns:1fr;}
@@ -425,10 +453,15 @@ footer span{color:var(--mint);}
   <div class="nav-logo" onclick="showMain()">Mirthmancer</div>
   <div class="nav-links">
     <a onclick="showMain('about')">About</a>
-    <a onclick="showMain('words')">Words</a>
-    <a onclick="showMain('sounds')">Sounds</a>
-    <a onclick="showMain('videos')">Video</a>
+    <div class="nav-dropdown">
+      <a onclick="showMain('words')">Words <span class="nav-dropdown-chevron">▾</span></a>
+      <div class="nav-dropdown-menu">
+        <a onclick="showSounds()">Sounds</a>
+        <a onclick="showVideos()">Videos</a>
+      </div>
+    </div>
     <a onclick="showMain('hire')">Work With Me</a>
+    <a onclick="showEvents()">Events</a>
     <a onclick="showContact()" class="nav-contact-btn">Contact</a>
   </div>
 </nav>
@@ -438,6 +471,7 @@ footer span{color:var(--mint);}
 
 <!-- HERO -->
 <section id="hero">
+  <img src="sigil.png" alt="Mirthmancer sigil" class="hero-sigil">
   <h1 class="hero-name">Mirthmancer</h1>
   <div class="hero-subtitle">Bard &nbsp;·&nbsp; Philocalist &nbsp;·&nbsp; Truth-seeker</div>
   <div class="hero-tagline">
@@ -446,7 +480,7 @@ footer span{color:var(--mint);}
     <span>Distilling the essence of all that moves me.</span>
   </div>
   <div class="hero-cta">
-    <button class="btn-primary" onclick="showMain('sounds')">Hear My Voice</button>
+    <button class="btn-primary" onclick="showSounds()">Hear My Voice</button>
     <button class="btn-ghost" onclick="showMain('hire')">Work With Me</button>
   </div>
 </section>
@@ -711,321 +745,7 @@ A sterling hypnosis to remold the soul.</div>
         </div>
       </div>
     </div>
-    <button class="view-all-btn" onclick="showPoems()">All Poems &nbsp;›</button>
-  </div>
-</section>
-
-<!-- SOUNDS -->
-<section id="sounds">
-  <div class="section-inner">
-    <h2 class="section-title">Sounds</h2>
-    <p class="section-lead">Magicians may never reveal their secrets, but that's exactly what I'm doing here.<br>If my voice makes you feel something, then my spells are working.</p>
-    <div class="divider"></div>
-    <div class="sounds-grid" id="sounds-grid">
-
-      <div class="sound-card glass" data-open="false">
-        <div class="sc-type">Original Music · Song</div>
-        <button class="sound-head" aria-expanded="false" aria-controls="sound-body-layers">
-          <span class="sc-title">Layers</span>
-          <span class="sc-chevron" aria-hidden="true">▾</span>
-        </button>
-        <div class="coming-soon" style="margin-top:.6rem;">
-          <div class="cs-dot"></div>
-          <div><div class="cs-text">Coming soon</div><div class="cs-sub">The spell is still being bottled.</div></div>
-        </div>
-        <div class="sound-body" id="sound-body-layers">
-          <div class="sound-divider"></div>
-          <div class="sound-text">Tear me from reality and place me on the page.
-Modulate mentality, embrace it and engage.
-Integrate all the great data that my brain ate.
-Share what I've ingested, we can all relate.
-
-A year of enrichment, escape, and endeavor.
-A tear for the tormented, tainted, and tethered.
-Don't fear detainment, detachment, or death.
-Appear for your peers. Peer into their depths.
-
-It's not about highlighting all of your failures,
-flaring your faults, or owning your ailments.
-They only pass through you, and you can decide who
-You are by choosing what brings you fulfillment.
-
-By forging a path that lets you forget it.
-The lives you'd have lived if life let you reset it.
-You thicken your plot, and pile on layers.
-And layers and layers and layers....
-
-Appeasement and pleasing have long lost their hold.
-The habits I've harbored and hated unfold.
-They saved me, they served me, but long past their due.
-Discarded and tarnished to make room for new.
-
-But first you must heal or old wounds will fester.
-They'll test you and threaten with gestures to best you.
-Invest in yourself and success is your treasure.
-Master momentum for mirth beyond measure.
-
-It's not about highlighting all of your failures,
-flaring your faults, or owning your ailments.
-They only pass through you, and you can decide who
-You are by choosing what brings you fulfillment.
-
-Start forging a path that lets you forget it:
-The lives you'd have lived if life let you reset it.
-Then thicken your plot, and pile on layers.
-And layers and layers and layers....</div>
-        </div>
-      </div>
-
-      <div class="sound-card glass" data-open="false">
-        <div class="sc-type">Original Music · Song</div>
-        <button class="sound-head" aria-expanded="false" aria-controls="sound-body-comets">
-          <span class="sc-title">Comets</span>
-          <span class="sc-chevron" aria-hidden="true">▾</span>
-        </button>
-        <div class="coming-soon" style="margin-top:.6rem;">
-          <div class="cs-dot"></div>
-          <div><div class="cs-text">Coming soon</div><div class="cs-sub">The spell is still being bottled.</div></div>
-        </div>
-        <div class="sound-body" id="sound-body-comets">
-          <div class="sound-divider"></div>
-          <div class="sound-text">Enter my atmosphere just for a fraction.
-I'll pull you in closely to share satisfaction.
-Attracted to your actions, your aura, your essence.
-Adoring each session in your precious presence.
-
-By cosmic currents, our orbits have crossed.
-I'm changed from the impact our collisions have caused.
-If I'm lost in space, I don't wish to be found.
-I'll count the rotations til you come back around.
-
-My muse, a lover, and above all, a friend.
-Let us uncover mysteries we cannot comprehend.
-I'll soar through your sky as you soar through mine.
-We're just frozen space dust - comets entwined.
-
-While carving our paths, we blaze through our trails.
-Particulates gather as we pick up new tails.
-We leave behind relics the cosmos will covet.
-Stories in the stars suspend til they plummet.
-
-Bodies entangled by forces unseen.
-Celestial intersection, our courses careen.
-Gravity twists us around both our centers.
-Your love is a drug and I'm on a bender.
-
-My muse, a lover, and above all, a friend.
-Let us uncover mysteries we cannot comprehend.
-I'll soar through your sky as you soar through mine.
-We're just frozen space dust - comets entwined.
-
-The moment I asked you to enter my fable.
-You infused me with power you sent from your cable.
-A wireless connection; the network is stable.
-No strings, no stress, no need for a label.
-
-No pretense, just presence. Your soul is so free.
-It brings me such joy when you share it with me.
-I don't wish to own you, possess, or postpone you.
-You're the queen of your kingdom, and I'll never dethrone you.
-
-The fantastic realms that we enter together.
-We'll generate pleasure with every endeavor.
-Our story so far has been one filled with bliss.
-We've written ourselves a beautiful plot twist.
-
-My muse, a lover, and above all, a friend.
-Let us uncover mysteries we cannot comprehend.
-I'll soar through your sky as you soar through mine.
-We're just frozen space dust - comets entwined.</div>
-        </div>
-      </div>
-
-      <div class="sound-card glass" data-open="false">
-        <div class="sc-type">Original Music · Song</div>
-        <button class="sound-head" aria-expanded="false" aria-controls="sound-body-undermine">
-          <span class="sc-title">Undermine the Overtones</span>
-          <span class="sc-chevron" aria-hidden="true">▾</span>
-        </button>
-        <div class="coming-soon" style="margin-top:.6rem;">
-          <div class="cs-dot"></div>
-          <div><div class="cs-text">Coming soon</div><div class="cs-sub">The spell is still being bottled.</div></div>
-        </div>
-        <div class="sound-body" id="sound-body-undermine">
-          <div class="sound-divider"></div>
-          <div class="sound-text">Approaching destination, customs is a breeze.
-Docked into my station, finally at ease.
-Quick, unload the cargo, organize supplies
-Build a brief abode beneath the starry skies.
-
-Anticipate, hesitate - either way: Syncopate
-Settle in a nation filled with Vibrations.
-Dance through the nettles, prickly sensations.
-Addicted to stickin' to bits and fixations.
-
-Bumblin' with beats beneath the big dipper.
-Every other neighbor a friendly day tripper.
-Levelin' with revelers and ravin' with the knaves.
-Meddlin' with settlers and wobblin' to waves.
-
-Undertake, overthrow.
-Undermine the overtones.
-Overflow with understanding,
-Feel the rhythm in your bones.
-
-Inner peace outer poise
-Sing it louder, use your voice.
-In the thick of out of wack
-Send your signal through the noise.
-
-The forlorn horns…. gasping, growling.
-The buttery bronze… honking &amp; howling.
-The braying, the blaring, they lock you in a trance,
-Frozen by a frisson of orchestral Expanse.
-
-He created a stage: an open-faced rave cage.
-Lock yourself in and the party begins.
-With brass from the past, the best begins blasting.
-Sippin' upon space dust, I start casting.
-
-Dishin' out cantrips. Flippin' the axis.
-A separated headtrip split into fractions.
-Reshape the wavelengths, rippled Reflections.
-Cosmic campout cracklin' with Connections.
-
-Undertake, overthrow.
-Undermine the overtones.
-Overflow with understanding,
-Feel the rhythm in your bones.
-
-Inner peace, outer poise.
-Sing it loud, use your voice.
-In the thick of out of wack
-Send your signal through the noise.
-
-Undermine the overtones.
-Feel the rhythm in your bones.
-Inner peace, outer poise
-Send your signal through the noise.</div>
-        </div>
-      </div>
-
-      <div class="sound-card glass" data-open="false">
-        <div class="sc-type">Original Music · Song</div>
-        <button class="sound-head" aria-expanded="false" aria-controls="sound-body-tethered">
-          <span class="sc-title">Tethered</span>
-          <span class="sc-chevron" aria-hidden="true">▾</span>
-        </button>
-        <div class="coming-soon" style="margin-top:.6rem;">
-          <div class="cs-dot"></div>
-          <div><div class="cs-text">Coming soon</div><div class="cs-sub">The spell is still being bottled.</div></div>
-        </div>
-        <div class="sound-body" id="sound-body-tethered">
-          <div class="sound-divider"></div>
-          <div class="sound-text">You pulled me from the trenches.
-You helped rebuild my stage.
-You lifted me with love
-Showed me there's still someone to save.
-
-Cus I believed I'd lost it -
-The blaze once in my eyes.
-Torn about &amp; tossed it out
-To silence my own cries.
-
-You tore me from the talons
-Of a beast I chose to ride.
-Ripped my reins from the creature's clutches,
-and placed them by my side.
-
-They say that life is tethered in mystery.
-My soul is tethered to you.
-I'll be your alibi through this web of lies.
-And together we can find the truth.
-
-In the evidence of our history
-I think I've found a clue
-The puzzle's prize, we might not find,
-But I'll search for the pieces with you!
-
-And then you called me from the trenches,
-So I could raise you to the stage.
-I lifted you with love
-Showed you there's still something to save.
-
-Cuz you believed you'd lose it
-Love's bell began to toll.
-All you needed was one to confide in -
-to peer into your soul.
-
-I pulled you from that prison
-A cell your mind had made to be
-I delved unto the demon's depths
-and drew the jailer's key.
-
-They say that life is tethered in mystery.
-My soul is tethered to you.
-I'll be your alibi through this web of lies.
-And together we can find the truth.
-
-In the evidence of our history
-I think I've found a clue
-The puzzle's prize, we might not find,
-But I'll search for the pieces with you!
-
-Discarded cargo - leave it in the dust.
-A rolling stone tends to gather what it must.
-Serves you fine to sever ties, separate from your old lives.
-Tethered in trajectory to help the world find levity!
-
-They say that life is tethered in mystery.
-My soul is tethered to you.
-I'll be your alibi through this web of lies.
-And together we can find the truth.
-
-In the evidence of our history
-I think I've found a clue
-The puzzle's prize, we might not find,
-But I'll search for the pieces....
-I'll search for the pieces with you!</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- VIDEOS -->
-<section id="videos">
-  <div class="section-inner">
-    <h2 class="section-title">Videos</h2>
-    <p class="section-lead">I'm told my eyebrows do most of the talking.</p>
-    <div class="divider"></div>
-    <div class="video-grid">
-      <div style="position:relative;border-radius:12px;overflow:hidden;border:1px solid rgba(163,140,230,0.15);">
-        <video controls preload="metadata" style="width:100%;display:block;background:#0d0a1a;">
-          <source src="Ego%20Death%20Open%20Mic.mp4" type="video/mp4">
-          Your browser doesn't support video playback.
-        </video>
-        <div class="v-label">Ego Death — Live Open Mic</div>
-      </div>
-      <div style="position:relative;border-radius:12px;overflow:hidden;border:1px solid rgba(163,140,230,0.15);">
-        <video controls preload="metadata" style="width:100%;display:block;background:#0d0a1a;">
-          <source src="Forgive.mp4" type="video/mp4">
-          Your browser doesn't support video playback.
-        </video>
-        <div class="v-label">Forgive — Live Open Mic</div>
-      </div>
-      <div class="video-thumb" style="background:linear-gradient(135deg,rgba(93,214,184,0.1),rgba(19,16,43,.8));">
-        <div style="position:relative;z-index:1;text-align:center;">
-          <div style="font-size:1.8rem;margin-bottom:.5rem;opacity:.4;">▶</div>
-          <div class="coming-soon" style="margin:0 auto;">
-            <div class="cs-dot"></div>
-            <div><div class="cs-text">Coming soon</div></div>
-          </div>
-        </div>
-        <div class="v-label"></div>
-      </div>
-    </div>
+    <button class="view-all-btn" onclick="showPoems()">more poems &nbsp;›</button>
   </div>
 </section>
 
@@ -1437,6 +1157,300 @@ We keep our hearts open at Okeechobee.</div>
   </div>
 </div>
 
+<!-- ═══════════ SOUNDS PAGE ═══════════ -->
+<div id="sounds-page" class="page">
+  <div class="subpage-inner">
+    <button class="back-link" onclick="showMain('words')">← Words</button>
+    <h2 class="section-title">Sounds</h2>
+    <p class="section-lead">Magicians may never reveal their secrets, but that's exactly what I'm doing here.<br>If my voice makes you feel something, then my spells are working.</p>
+    <div class="divider"></div>
+    <div class="coming-soon-large">
+      <div class="cs-big-dot"></div>
+      <div class="cs-big-text">Audio Coming Soon</div>
+      <div class="cs-big-sub">The recordings are still being bottled. Lyrics available now.</div>
+    </div>
+    <div class="sounds-grid" id="sounds-grid">
+
+      <div class="sound-card glass" data-open="false">
+        <div class="sc-type">Original Music · Song</div>
+        <button class="sound-head" aria-expanded="false" aria-controls="sound-body-layers">
+          <span class="sc-title">Layers</span>
+          <span class="sc-chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="sound-body" id="sound-body-layers">
+          <div class="sound-divider"></div>
+          <div class="sound-text">Tear me from reality and place me on the page.
+Modulate mentality, embrace it and engage.
+Integrate all the great data that my brain ate.
+Share what I've ingested, we can all relate.
+
+A year of enrichment, escape, and endeavor.
+A tear for the tormented, tainted, and tethered.
+Don't fear detainment, detachment, or death.
+Appear for your peers. Peer into their depths.
+
+It's not about highlighting all of your failures,
+flaring your faults, or owning your ailments.
+They only pass through you, and you can decide who
+You are by choosing what brings you fulfillment.
+
+By forging a path that lets you forget it.
+The lives you'd have lived if life let you reset it.
+You thicken your plot, and pile on layers.
+And layers and layers and layers....
+
+Appeasement and pleasing have long lost their hold.
+The habits I've harbored and hated unfold.
+They saved me, they served me, but long past their due.
+Discarded and tarnished to make room for new.
+
+But first you must heal or old wounds will fester.
+They'll test you and threaten with gestures to best you.
+Invest in yourself and success is your treasure.
+Master momentum for mirth beyond measure.
+
+It's not about highlighting all of your failures,
+flaring your faults, or owning your ailments.
+They only pass through you, and you can decide who
+You are by choosing what brings you fulfillment.
+
+Start forging a path that lets you forget it:
+The lives you'd have lived if life let you reset it.
+Then thicken your plot, and pile on layers.
+And layers and layers and layers....</div>
+        </div>
+      </div>
+
+      <div class="sound-card glass" data-open="false">
+        <div class="sc-type">Original Music · Song</div>
+        <button class="sound-head" aria-expanded="false" aria-controls="sound-body-comets">
+          <span class="sc-title">Comets</span>
+          <span class="sc-chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="sound-body" id="sound-body-comets">
+          <div class="sound-divider"></div>
+          <div class="sound-text">Enter my atmosphere just for a fraction.
+I'll pull you in closely to share satisfaction.
+Attracted to your actions, your aura, your essence.
+Adoring each session in your precious presence.
+
+By cosmic currents, our orbits have crossed.
+I'm changed from the impact our collisions have caused.
+If I'm lost in space, I don't wish to be found.
+I'll count the rotations til you come back around.
+
+My muse, a lover, and above all, a friend.
+Let us uncover mysteries we cannot comprehend.
+I'll soar through your sky as you soar through mine.
+We're just frozen space dust - comets entwined.
+
+While carving our paths, we blaze through our trails.
+Particulates gather as we pick up new tails.
+We leave behind relics the cosmos will covet.
+Stories in the stars suspend til they plummet.
+
+Bodies entangled by forces unseen.
+Celestial intersection, our courses careen.
+Gravity twists us around both our centers.
+Your love is a drug and I'm on a bender.
+
+My muse, a lover, and above all, a friend.
+Let us uncover mysteries we cannot comprehend.
+I'll soar through your sky as you soar through mine.
+We're just frozen space dust - comets entwined.
+
+The moment I asked you to enter my fable.
+You infused me with power you sent from your cable.
+A wireless connection; the network is stable.
+No strings, no stress, no need for a label.
+
+No pretense, just presence. Your soul is so free.
+It brings me such joy when you share it with me.
+I don't wish to own you, possess, or postpone you.
+You're the queen of your kingdom, and I'll never dethrone you.
+
+The fantastic realms that we enter together.
+We'll generate pleasure with every endeavor.
+Our story so far has been one filled with bliss.
+We've written ourselves a beautiful plot twist.
+
+My muse, a lover, and above all, a friend.
+Let us uncover mysteries we cannot comprehend.
+I'll soar through your sky as you soar through mine.
+We're just frozen space dust - comets entwined.</div>
+        </div>
+      </div>
+
+      <div class="sound-card glass" data-open="false">
+        <div class="sc-type">Original Music · Song</div>
+        <button class="sound-head" aria-expanded="false" aria-controls="sound-body-undermine">
+          <span class="sc-title">Undermine the Overtones</span>
+          <span class="sc-chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="sound-body" id="sound-body-undermine">
+          <div class="sound-divider"></div>
+          <div class="sound-text">Approaching destination, customs is a breeze.
+Docked into my station, finally at ease.
+Quick, unload the cargo, organize supplies
+Build a brief abode beneath the starry skies.
+
+Anticipate, hesitate - either way: Syncopate
+Settle in a nation filled with Vibrations.
+Dance through the nettles, prickly sensations.
+Addicted to stickin' to bits and fixations.
+
+Bumblin' with beats beneath the big dipper.
+Every other neighbor a friendly day tripper.
+Levelin' with revelers and ravin' with the knaves.
+Meddlin' with settlers and wobblin' to waves.
+
+Undertake, overthrow.
+Undermine the overtones.
+Overflow with understanding,
+Feel the rhythm in your bones.
+
+Inner peace outer poise
+Sing it louder, use your voice.
+In the thick of out of wack
+Send your signal through the noise.
+
+The forlorn horns…. gasping, growling.
+The buttery bronze… honking &amp; howling.
+The braying, the blaring, they lock you in a trance,
+Frozen by a frisson of orchestral Expanse.
+
+He created a stage: an open-faced rave cage.
+Lock yourself in and the party begins.
+With brass from the past, the best begins blasting.
+Sippin' upon space dust, I start casting.
+
+Dishin' out cantrips. Flippin' the axis.
+A separated headtrip split into fractions.
+Reshape the wavelengths, rippled Reflections.
+Cosmic campout cracklin' with Connections.
+
+Undertake, overthrow.
+Undermine the overtones.
+Overflow with understanding,
+Feel the rhythm in your bones.
+
+Inner peace, outer poise.
+Sing it loud, use your voice.
+In the thick of out of wack
+Send your signal through the noise.
+
+Undermine the overtones.
+Feel the rhythm in your bones.
+Inner peace, outer poise
+Send your signal through the noise.</div>
+        </div>
+      </div>
+
+      <div class="sound-card glass" data-open="false">
+        <div class="sc-type">Original Music · Song</div>
+        <button class="sound-head" aria-expanded="false" aria-controls="sound-body-tethered">
+          <span class="sc-title">Tethered</span>
+          <span class="sc-chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="sound-body" id="sound-body-tethered">
+          <div class="sound-divider"></div>
+          <div class="sound-text">You pulled me from the trenches.
+You helped rebuild my stage.
+You lifted me with love
+Showed me there's still someone to save.
+
+Cus I believed I'd lost it -
+The blaze once in my eyes.
+Torn about &amp; tossed it out
+To silence my own cries.
+
+You tore me from the talons
+Of a beast I chose to ride.
+Ripped my reins from the creature's clutches,
+and placed them by my side.
+
+They say that life is tethered in mystery.
+My soul is tethered to you.
+I'll be your alibi through this web of lies.
+And together we can find the truth.
+
+In the evidence of our history
+I think I've found a clue
+The puzzle's prize, we might not find,
+But I'll search for the pieces with you!
+
+And then you called me from the trenches,
+So I could raise you to the stage.
+I lifted you with love
+Showed you there's still something to save.
+
+Cuz you believed you'd lose it
+Love's bell began to toll.
+All you needed was one to confide in -
+to peer into your soul.
+
+I pulled you from that prison
+A cell your mind had made to be
+I delved unto the demon's depths
+and drew the jailer's key.
+
+They say that life is tethered in mystery.
+My soul is tethered to you.
+I'll be your alibi through this web of lies.
+And together we can find the truth.
+
+In the evidence of our history
+I think I've found a clue
+The puzzle's prize, we might not find,
+But I'll search for the pieces with you!
+
+Discarded cargo - leave it in the dust.
+A rolling stone tends to gather what it must.
+Serves you fine to sever ties, separate from your old lives.
+Tethered in trajectory to help the world find levity!
+
+They say that life is tethered in mystery.
+My soul is tethered to you.
+I'll be your alibi through this web of lies.
+And together we can find the truth.
+
+In the evidence of our history
+I think I've found a clue
+The puzzle's prize, we might not find,
+But I'll search for the pieces....
+I'll search for the pieces with you!</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ VIDEOS PAGE ═══════════ -->
+<div id="videos-page" class="page">
+  <div class="subpage-inner">
+    <button class="back-link" onclick="showMain('words')">← Words</button>
+    <h2 class="section-title">Videos</h2>
+    <p class="section-lead">I'm told my eyebrows do most of the talking.</p>
+    <div class="divider"></div>
+    <div class="coming-soon-large">
+      <div class="cs-big-dot"></div>
+      <div class="cs-big-text">Coming Soon</div>
+      <div class="cs-big-sub">Video recordings are on their way.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ EVENTS PAGE ═══════════ -->
+<div id="events-page" class="page">
+  <div class="subpage-inner">
+    <button class="back-link" onclick="showMain()">← Home</button>
+    <h2 class="section-title">Upcoming Events</h2>
+    <div class="divider"></div>
+    <img src="mbm-poster.png" alt="Mirth Beyond Measure — Live Interactive Poetry at Priceless Music Festival" class="events-poster">
+  </div>
+</div>
+
 <!-- ═══════════ CONTACT PAGE ═══════════ -->
 <div id="contact-page" class="page">
   <div class="contact-pg-inner">
@@ -1452,7 +1466,7 @@ We keep our hearts open at Okeechobee.</div>
     </div>
 
     <div class="contact-pg-name">Kevin Cullinan</div>
-    <div class="contact-pg-brand">Mirthmancer — Bard · Philocalist · Truth-seeker</div>
+    <div class="contact-pg-brand">Mirthmancer</div>
 
     <div class="contact-pg-box glass">
       <div class="contact-row">
@@ -1476,7 +1490,7 @@ We keep our hearts open at Okeechobee.</div>
 <!-- ═══════════ SCRIPTS ═══════════ -->
 <script>
 // ── PAGE NAVIGATION ──
-const PAGES=['main-page','contact-page','poems-page'];
+const PAGES=['main-page','contact-page','poems-page','sounds-page','videos-page','events-page'];
 function showPage(id){
   PAGES.forEach(p=>document.getElementById(p).classList.remove('active'));
   document.getElementById(id).classList.add('active');
@@ -1484,6 +1498,9 @@ function showPage(id){
 }
 function showContact(){ showPage('contact-page'); }
 function showPoems(){ showPage('poems-page'); }
+function showSounds(){ showPage('sounds-page'); }
+function showVideos(){ showPage('videos-page'); }
+function showEvents(){ showPage('events-page'); }
 function showMain(anchor){
   showPage('main-page');
   if(anchor){
@@ -1574,13 +1591,14 @@ drawStatic();
 
 // ── FLOATING SYMBOLS ──
 const symbols={
-  olive:`<svg viewBox="0 0 40 60" xmlns="http://www.w3.org/2000/svg"><path d="M20 55 Q20 30 20 5" stroke="#8aaa55" stroke-width="1.5" fill="none"/><ellipse cx="14" cy="22" rx="5" ry="8" fill="#7a9e45" opacity=".8" transform="rotate(-25,14,22)"/><ellipse cx="26" cy="32" rx="5" ry="8" fill="#6a8e35" opacity=".7" transform="rotate(20,26,32)"/><ellipse cx="13" cy="42" rx="4" ry="7" fill="#7a9e45" opacity=".75" transform="rotate(-15,13,42)"/><circle cx="22" cy="18" r="3" fill="#5a7a2a" opacity=".6"/><circle cx="15" cy="35" r="2.5" fill="#4a6a1a" opacity=".55"/></svg>`,
-  delphinium:`<svg viewBox="0 0 30 70" xmlns="http://www.w3.org/2000/svg"><line x1="15" y1="65" x2="15" y2="5" stroke="#6b8cd4" stroke-width="1.5"/><g transform="translate(15,12)"><ellipse rx="5" ry="7" fill="#7b9ee8" opacity=".85" transform="rotate(-20)"/><ellipse rx="5" ry="7" fill="#8aaef8" opacity=".8" transform="translate(0,10) rotate(20)"/><ellipse rx="4" ry="6" fill="#9bbeff" opacity=".75" transform="translate(0,22) rotate(-10)"/><ellipse rx="4" ry="6" fill="#7b9ee8" opacity=".7" transform="translate(0,33) rotate(15)"/><circle cy="-2" r="3" fill="#c8d8ff" opacity=".9"/></g></svg>`,
-  rooster:`<svg viewBox="0 0 50 60" xmlns="http://www.w3.org/2000/svg"><ellipse cx="30" cy="38" rx="14" ry="10" fill="#2d1060" opacity=".85"/><circle cx="30" cy="24" r="9" fill="#3d1a80" opacity=".9"/><path d="M30 15 Q28 8 24 5 Q28 7 30 4 Q32 7 36 5 Q32 8 30 15Z" fill="#a03080" opacity=".9"/><path d="M39 24 Q45 18 48 20 Q44 24 48 28 Q43 26 39 28Z" fill="#cc5599" opacity=".8"/><path d="M26 28 L22 32 L24 34 L28 30Z" fill="#ff3355" opacity=".9"/><circle cx="33" cy="21" r="2" fill="#f0e8ff" opacity=".95"/><circle cx="33.7" cy="20.5" r=".8" fill="#1a0040"/><path d="M30 46 L24 58 M30 46 L30 58 M30 46 L36 58" stroke="#8060cc" stroke-width="1.5" fill="none"/></svg>`,
+  olive:`<svg viewBox="0 0 40 64" xmlns="http://www.w3.org/2000/svg"><path d="M20 60 Q20 32 20 5" stroke="#6a7a50" stroke-width="1.5" fill="none"/><ellipse cx="12" cy="20" rx="4" ry="10" fill="#7a8858" opacity=".82" transform="rotate(-28,12,20)"/><ellipse cx="28" cy="28" rx="4" ry="10" fill="#6a7848" opacity=".78" transform="rotate(24,28,28)"/><ellipse cx="11" cy="40" rx="3.5" ry="9" fill="#7a8858" opacity=".75" transform="rotate(-20,11,40)"/><ellipse cx="29" cy="48" rx="3.5" ry="9" fill="#6a7848" opacity=".72" transform="rotate(22,29,48)"/><circle cx="22" cy="17" r="3.2" fill="#2a5878" opacity=".8"/><circle cx="17" cy="12" r="2.5" fill="#1a4868" opacity=".75"/><circle cx="14" cy="44" r="3" fill="#4a2888" opacity=".75"/><circle cx="24" cy="36" r="2.5" fill="#3a1878" opacity=".7"/></svg>`,
+  delphinium:`<svg viewBox="0 0 32 72" xmlns="http://www.w3.org/2000/svg"><line x1="16" y1="68" x2="16" y2="6" stroke="#4a5a30" stroke-width="1.5"/><g transform="translate(16,14)"><circle r="4" fill="#5040a8" opacity=".88"/><circle r="2" fill="#9880e0" opacity=".7"/></g><g transform="translate(16,26)"><circle r="5.5" fill="#6050b8" opacity=".85"/><circle r="2.5" fill="#b0a0f0" opacity=".65"/><circle cx="-3" cy="-3" r="3" fill="#5040a8" opacity=".7"/><circle cx="3" cy="-3" r="3" fill="#5848b0" opacity=".68"/><circle cx="-3" cy="3" r="3" fill="#4838a0" opacity=".68"/><circle cx="3" cy="3" r="3" fill="#5040a8" opacity=".68"/></g><g transform="translate(16,40)"><circle r="5.5" fill="#6050b8" opacity=".82"/><circle r="2.5" fill="#b0a0f0" opacity=".62"/><circle cx="-3" cy="-3" r="3" fill="#5040a8" opacity=".67"/><circle cx="3" cy="-3" r="3" fill="#5848b0" opacity=".65"/><circle cx="-3" cy="3" r="3" fill="#4838a0" opacity=".65"/><circle cx="3" cy="3" r="3" fill="#5040a8" opacity=".65"/></g><g transform="translate(16,54)"><circle r="4.5" fill="#5040a8" opacity=".78"/><circle r="2" fill="#a090e0" opacity=".58"/></g><g transform="translate(16,64)"><circle r="3.5" fill="#6050b8" opacity=".72"/><circle r="1.5" fill="#a090e0" opacity=".52"/></g><path d="M16 36 L8 31" stroke="#4a5a30" stroke-width="1" fill="none" opacity=".5"/><path d="M16 48 L24 43" stroke="#4a5a30" stroke-width="1" fill="none" opacity=".5"/></svg>`,
   bear:`<svg viewBox="0 0 55 55" xmlns="http://www.w3.org/2000/svg"><ellipse cx="27" cy="32" rx="16" ry="14" fill="#1a1025" opacity=".9"/><circle cx="27" cy="21" r="11" fill="#231535" opacity=".9"/><circle cx="19" cy="13" r="6" fill="#1a1025" opacity=".9"/><circle cx="35" cy="13" r="6" fill="#1a1025" opacity=".9"/><ellipse cx="27" cy="26" rx="5" ry="3.5" fill="#2d1d40" opacity=".85"/><circle cx="23" cy="20" r="2" fill="#e8d8ff" opacity=".9"/><circle cx="31" cy="20" r="2" fill="#e8d8ff" opacity=".9"/><circle cx="23.6" cy="19.6" r=".9" fill="#1a0030"/><circle cx="31.6" cy="19.6" r=".9" fill="#1a0030"/><ellipse cx="27" cy="50" rx="12" ry="8" fill="#1a1025" opacity=".85"/></svg>`,
   peace:`<svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg"><circle cx="22" cy="22" r="19" fill="none" stroke="#89c4e1" stroke-width="2" opacity=".75"/><line x1="22" y1="3" x2="22" y2="41" stroke="#89c4e1" stroke-width="2" opacity=".75"/><line x1="22" y1="22" x2="7" y2="36" stroke="#89c4e1" stroke-width="2" opacity=".75"/><line x1="22" y1="22" x2="37" y2="36" stroke="#89c4e1" stroke-width="2" opacity=".75"/></svg>`,
   potion:`<svg viewBox="0 0 36 50" xmlns="http://www.w3.org/2000/svg"><rect x="14" y="3" width="8" height="9" rx="2" fill="#8060b0" opacity=".8"/><path d="M10 12 Q4 22 4 32 Q4 46 18 46 Q32 46 32 32 Q32 22 26 12Z" fill="#6030a0" opacity=".8"/><ellipse cx="18" cy="28" rx="6" ry="4" fill="#c080ff" opacity=".5"/><circle cx="13" cy="22" r="2" fill="#e0b0ff" opacity=".55"/><circle cx="23" cy="35" r="1.5" fill="#d0a0ff" opacity=".5"/></svg>`,
   dust:`<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="2" fill="#e8d060" opacity=".9"/><circle cx="12" cy="15" r="1.2" fill="#c8e0f0" opacity=".7"/><circle cx="28" cy="14" r="1" fill="#d0c0ff" opacity=".75"/><circle cx="8" cy="26" r=".8" fill="#a0e8d0" opacity=".65"/><circle cx="30" cy="28" r="1.1" fill="#e8c0ff" opacity=".7"/><circle cx="16" cy="32" r=".9" fill="#c8e8a0" opacity=".6"/><circle cx="26" cy="8" r=".7" fill="#f0d880" opacity=".65"/><path d="M19 17 L20 20 L21 17 L20 14Z" fill="#ffd060" opacity=".8"/><path d="M17 20 L20 21 L17 22 L14 21Z" fill="#ffe080" opacity=".75"/><path d="M23 20 L20 21 L23 22 L26 21Z" fill="#ffd060" opacity=".75"/></svg>`,
+  blackhole:`<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="22" fill="none" stroke="rgba(60,100,200,0.2)" stroke-width="1"/><path d="M24 8 C34 8 42 16 40 24 C38 32 28 36 20 32 C12 28 10 18 16 12 C20 8 24 8 24 8Z" fill="none" stroke="rgba(80,140,220,0.65)" stroke-width="2" stroke-linecap="round"/><path d="M24 40 C14 40 6 32 8 24 C10 16 20 12 28 16 C36 20 38 30 32 36 C28 40 24 40 24 40Z" fill="none" stroke="rgba(100,160,240,0.45)" stroke-width="1.5" stroke-linecap="round"/><circle cx="24" cy="24" r="8" fill="#070518" opacity=".95"/><circle cx="24" cy="24" r="5" fill="#0a0820" opacity=".98"/><circle cx="24" cy="24" r="8" fill="none" stroke="rgba(100,140,255,0.5)" stroke-width="1.5"/></svg>`,
+  compasseye:`<svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg"><path d="M25 3L26.5 21L25 47L23.5 21Z" fill="#a0a8cc" opacity=".7"/><path d="M3 25L21 23.5L47 25L21 26.5Z" fill="#a0a8cc" opacity=".7"/><path d="M7.1 7.1L19.5 19.5" stroke="#8090b8" stroke-width="2.5" opacity=".45" stroke-linecap="round"/><path d="M42.9 7.1L30.5 19.5" stroke="#8090b8" stroke-width="2.5" opacity=".45" stroke-linecap="round"/><path d="M7.1 42.9L19.5 30.5" stroke="#8090b8" stroke-width="2.5" opacity=".45" stroke-linecap="round"/><path d="M42.9 42.9L30.5 30.5" stroke="#8090b8" stroke-width="2.5" opacity=".45" stroke-linecap="round"/><path d="M10 25 Q25 12 40 25 Q25 38 10 25Z" fill="rgba(20,15,45,0.4)" stroke="#c8cce8" stroke-width="1.2" opacity=".8"/><circle cx="25" cy="25" r="6" fill="#2a2d80" opacity=".9"/><circle cx="25" cy="25" r="3" fill="#060415" opacity=".98"/><circle cx="23" cy="23.5" r="1.2" fill="white" opacity=".45"/></svg>`,
 };
 const symNames=Object.keys(symbols);
 const symLayer=document.getElementById('sym-layer');
