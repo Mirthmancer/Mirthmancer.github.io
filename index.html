@@ -427,6 +427,23 @@ footer span{color:var(--mint);}
 }
 .view-all-btn:hover{color:var(--mint);gap:.7rem;}
 
+/* ── NEWSLETTER ── */
+.newsletter-section{
+  margin-top:2.8rem;
+  padding:2.4rem 2rem;
+  border-radius:16px;
+  background:rgba(19,16,43,0.65);
+  border:1px solid rgba(163,140,230,0.14);
+  backdrop-filter:blur(8px);
+  text-align:center;
+}
+.newsletter-label{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mint);margin-bottom:.5rem;}
+.newsletter-title{font-family:'Cinzel Decorative',serif;font-size:clamp(1.1rem,2.5vw,1.55rem);color:var(--cream);margin-bottom:.6rem;}
+.newsletter-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:var(--skylt);margin-bottom:1.6rem;line-height:1.7;}
+#newsletter-page{min-height:100vh;padding-top:7rem;position:relative;z-index:10;}
+.newsletter-pg-inner{max-width:680px;margin:0 auto;padding:0 2rem 6rem;}
+.newsletter-pg-embed{margin-top:2rem;}
+
 /* ── RESPONSIVE ── */
 @media(max-width:700px){
   nav{padding:1rem 1.3rem;}
@@ -463,6 +480,7 @@ footer span{color:var(--mint);}
     </div>
     <a onclick="showMain('hire')">Work With Me</a>
     <a onclick="showEvents()">Events</a>
+    <a onclick="showNewsletter()">Newsletter</a>
     <a onclick="showContact()" class="nav-contact-btn">Contact</a>
   </div>
 </nav>
@@ -746,6 +764,12 @@ A sterling hypnosis to remold the soul.</div>
       </div>
     </div>
     <button class="view-all-btn" onclick="showPoems()">more poems &nbsp;›</button>
+    <div class="newsletter-section">
+      <div class="newsletter-label">Stay Connected</div>
+      <div class="newsletter-title">Join the Circle</div>
+      <div class="newsletter-sub">New poems, sounds, and dispatches from the in-between — delivered to your inbox.</div>
+      <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="61c5564a-15b8-4ab2-a1b6-6ebc87820cd5"></script>
+    </div>
   </div>
 </section>
 
@@ -1451,6 +1475,20 @@ I'll search for the pieces with you!</div>
   </div>
 </div>
 
+<!-- ═══════════ NEWSLETTER PAGE ═══════════ -->
+<div id="newsletter-page" class="page">
+  <div class="newsletter-pg-inner">
+    <button class="back-link" onclick="showMain()">← Home</button>
+    <div class="section-label">Mirthmancer's Newsletter</div>
+    <h2 class="section-title">Join the Circle</h2>
+    <p class="section-lead">New poems, sounds, and dispatches from the in-between — delivered to your inbox.</p>
+    <div class="divider"></div>
+    <div class="newsletter-pg-embed">
+      <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="61c5564a-15b8-4ab2-a1b6-6ebc87820cd5"></script>
+    </div>
+  </div>
+</div>
+
 <!-- ═══════════ CONTACT PAGE ═══════════ -->
 <div id="contact-page" class="page">
   <div class="contact-pg-inner">
@@ -1490,7 +1528,7 @@ I'll search for the pieces with you!</div>
 <!-- ═══════════ SCRIPTS ═══════════ -->
 <script>
 // ── PAGE NAVIGATION ──
-const PAGES=['main-page','contact-page','poems-page','sounds-page','videos-page','events-page'];
+const PAGES=['main-page','contact-page','poems-page','sounds-page','videos-page','events-page','newsletter-page'];
 function showPage(id){
   PAGES.forEach(p=>document.getElementById(p).classList.remove('active'));
   document.getElementById(id).classList.add('active');
@@ -1501,6 +1539,7 @@ function showPoems(){ showPage('poems-page'); }
 function showSounds(){ showPage('sounds-page'); }
 function showVideos(){ showPage('videos-page'); }
 function showEvents(){ showPage('events-page'); }
+function showNewsletter(){ showPage('newsletter-page'); }
 function showMain(anchor){
   showPage('main-page');
   if(anchor){
