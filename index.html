@@ -436,7 +436,9 @@ footer span{color:var(--mint);}
   border:1px solid rgba(163,140,230,0.14);
   backdrop-filter:blur(8px);
   text-align:center;
+  display:flex;flex-direction:column;align-items:center;
 }
+.newsletter-section>*{max-width:100%;}
 .newsletter-label{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mint);margin-bottom:.5rem;}
 .newsletter-title{font-family:'Cinzel Decorative',serif;font-size:clamp(1.1rem,2.5vw,1.55rem);color:var(--cream);margin-bottom:.6rem;}
 .newsletter-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:var(--skylt);margin-bottom:1.6rem;line-height:1.7;}
@@ -765,9 +767,7 @@ A sterling hypnosis to remold the soul.</div>
     </div>
     <button class="view-all-btn" onclick="showPoems()">more poems &nbsp;›</button>
     <div class="newsletter-section">
-      <div class="newsletter-label">Stay Connected</div>
-      <div class="newsletter-title">Join the Circle</div>
-      <div class="newsletter-sub">New poems, sounds, and dispatches from the in-between — delivered to your inbox.</div>
+      <div class="newsletter-title">Join my newsletter</div>
       <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="61c5564a-15b8-4ab2-a1b6-6ebc87820cd5"></script>
     </div>
   </div>
