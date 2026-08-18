@@ -439,6 +439,10 @@ footer span{color:var(--mint);}
   display:flex;flex-direction:column;align-items:center;
 }
 .newsletter-section>*{max-width:100%;}
+.newsletter-pg-inner iframe,.newsletter-pg-inner form,.newsletter-pg-inner>div:not([class]),
+.newsletter-section iframe,.newsletter-section form,.newsletter-section>div:not([class]){
+  display:block !important;margin-left:auto !important;margin-right:auto !important;
+}
 .newsletter-label{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mint);margin-bottom:.5rem;}
 .newsletter-title{font-family:'Cinzel Decorative',serif;font-size:clamp(1.1rem,2.5vw,1.55rem);color:var(--cream);margin-bottom:.6rem;}
 .newsletter-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:var(--skylt);margin-bottom:1.6rem;line-height:1.7;}
@@ -1654,6 +1658,16 @@ function spawnSymbol(){
 }
 for(let i=0;i<6;i++) setTimeout(spawnSymbol,i*800);
 setInterval(spawnSymbol,2400);
+
+// ── CENTER BEEHIIV EMBEDS ──
+new MutationObserver(()=>{
+  document.querySelectorAll('.newsletter-pg-inner>*:not(button):not(h2),.newsletter-section>*:not(h2)').forEach(el=>{
+    if(el.tagName==='SCRIPT') return;
+    el.style.display='block';
+    el.style.marginLeft='auto';
+    el.style.marginRight='auto';
+  });
+}).observe(document.body,{childList:true,subtree:true});
 
 // ── NAV DROPDOWN WITH LINGER DELAY ──
 document.querySelectorAll('.nav-dropdown').forEach(dd=>{
