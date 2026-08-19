@@ -420,12 +420,13 @@ footer span{color:var(--mint);}
 #poems-page{min-height:100vh;padding-top:7rem;position:relative;z-index:10;}
 .poems-pg-inner{max-width:1080px;margin:0 auto;padding:0 2rem 6rem;}
 .view-all-btn{
-  display:inline-flex;align-items:center;gap:.45rem;margin-top:2rem;
-  font-size:1.05rem;letter-spacing:.12em;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:1.3rem;letter-spacing:.1em;text-transform:uppercase;
   color:var(--sky);background:none;border:none;cursor:pointer;
-  padding:0;transition:color .2s,gap .2s;font-family:'Nunito',sans-serif;
+  padding:.4rem 0;transition:color .2s,gap .2s;font-family:'Nunito',sans-serif;
 }
-.view-all-btn:hover{color:var(--mint);gap:.7rem;}
+.view-all-btn:hover{color:var(--mint);gap:.8rem;}
+.words-cta{display:flex;flex-direction:column;align-items:center;gap:1.1rem;margin-top:2.5rem;}
 
 /* ── NEWSLETTER ── */
 .newsletter-section{
@@ -769,8 +770,10 @@ A sterling hypnosis to remold the soul.</div>
         </div>
       </div>
     </div>
-    <button class="view-all-btn" onclick="showPoems()">more poems &nbsp;›</button>
-    <button class="view-all-btn" onclick="showNewsletter()" style="margin-top:.8rem;">Join my Newsletter &nbsp;›</button>
+    <div class="words-cta">
+      <button class="view-all-btn" onclick="showPoems()">more poems &nbsp;›</button>
+      <button class="view-all-btn" onclick="showNewsletter()">Join my Newsletter &nbsp;›</button>
+    </div>
   </div>
 </section>
 
